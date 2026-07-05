@@ -2,7 +2,7 @@
     "tribeData": {
         "ancients": {
             "idx": -1,
-            "startingStars": 7,
+            "startingStars": 4,
             "color": 48127,
             "language": "pol,topan,poly,topia,toria,topius,pius,top,polan,toran,ol,tes,la,sa,tor,cite,ty,cap,kap,sua,ius,xin,ouy,urk,ki,dor,wast,ze,tza,on,aqu,cy",
             "startingUnit": "archeologist_unit",
@@ -830,7 +830,7 @@
 			"idx": -1
 		},
         "animaconduit_improvement": {
-			"cost": 2,
+			"cost": 1,
 			"terrainRequirements": [
 				{
 					"terrain": "forest"
@@ -848,12 +848,12 @@
 					"improvement": "lightningrod_improvement"
 				}
 			],
-			"maxLevel": 3,
+			"maxLevel": 2,
 			"idx": -1
 		},
         "animacollect_improvement": {
             "idx": -1,
-            "cost": 2,
+            "cost": 3,
             "improvementAbilities": [
                 "discrete"
             ],

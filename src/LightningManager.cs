@@ -120,7 +120,7 @@ public static class LightningManager
 	{
         if (__instance.Type == AMain.Ritual)
         {
-            gameState.ActionStack.Add(new ImprovementLevelDownAction(__instance.PlayerId, __instance.Coordinates, 3));
+            gameState.ActionStack.Add(new ImprovementLevelDownAction(__instance.PlayerId, __instance.Coordinates, 2));
         }
 	}
 }

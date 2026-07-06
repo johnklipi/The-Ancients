@@ -837,7 +837,10 @@
 				},
                 {
 					"terrain": "field"
-				}
+				},
+                {
+                    "terrain": "mountain"
+                }
 			],
             "improvementAbilities": [
                 "electric_improvementability",
@@ -869,7 +872,10 @@
 				},
                 {
 					"terrain": "field"
-				}
+				},
+                {
+                    "terrain": "mountain"
+                }
 			],
 			"maxLevel": 8,
             "improvementAbilities": [

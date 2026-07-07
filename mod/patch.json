@@ -13,9 +13,9 @@
             },
             "resourceModifier":{
                 "metal": 1.5,
-                "fruit": 0.5,
+                "fruit": 0.8,
                 "game": 1.5,
-                "crop": 0.2
+                "crop": 0.4
             },
             "startingTech":[
                 "basic",

@@ -2,7 +2,7 @@
     "tribeData": {
         "ancients": {
             "idx": -1,
-            "startingStars": 4,
+            "startingStars": 5,
             "color": 48127,
             "language": "pol,topan,poly,topia,toria,topius,pius,top,polan,toran,ol,tes,la,sa,tor,cite,ty,cap,kap,sua,ius,xin,ouy,urk,ki,dor,wast,ze,tza,on,aqu,cy",
             "startingUnit": "archeologist_unit",
@@ -856,7 +856,7 @@
 		},
         "animacollect_improvement": {
             "idx": -1,
-            "cost": 3,
+            "cost": 2,
             "improvementAbilities": [
                 "discrete"
             ],

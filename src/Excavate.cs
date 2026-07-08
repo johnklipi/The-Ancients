@@ -178,21 +178,19 @@ public class ExcavateReaction : PolibReactionBase
             instance.Render();
             instance.SpawnShine();
             instance.Sway();
+            if (GameManager.GameState.Map.GetTile(action.UnitHome) != null)
+            {
+                Tile homeInstance = GameManager.GameState.Map.GetTile(action.UnitHome).GetInstance();
+                if (homeInstance != null)
+                {
+                    homeInstance.Render();
+                }
+            }
             AudioManager.PlaySFXAtTile(SFXTypes.Capture, tile.coordinates);
             GameManager.DelayCall(200, onComplete);
+            return;
         }
-        if (GameManager.GameState.Map.GetTile(action.UnitHome) != null)
-        {
-            Tile homeInstance = GameManager.GameState.Map.GetTile(action.UnitHome).GetInstance();
-            if (homeInstance != null)
-            {
-                homeInstance.Render();
-            }
-        }
-        else
-        {
-            onComplete.Invoke();
-        }
+        onComplete.Invoke();
     }
 }
 

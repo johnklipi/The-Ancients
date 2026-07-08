@@ -2,7 +2,7 @@
     "tribeData": {
         "ancients": {
             "idx": -1,
-            "startingStars": 5,
+            "startingStars": 7,
             "color": 48127,
             "language": "pol,topan,poly,to,pia,ria,pius,polan,ran,ol,tes,la,sa,tor,ci,te,ty,cap,kap,sua,ius,xin,ouy,urk,ki,dor,wast,tza,on,aqu,cy",
             "startingUnit": "archeologist_unit",
@@ -18,11 +18,11 @@
                 "crop": 0.4
             },
             "startingTech":[
-                "basic",
-                "animation_tech"
+                "basic"
             ],
             "startingResource":[
-                "crop",
+                "game",
+                "game",
                 "fruit",
                 "fruit"
             ],

@@ -122,5 +122,15 @@ public static class LightningManager
         {
             gameState.ActionStack.Add(new ImprovementLevelDownAction(__instance.PlayerId, __instance.Coordinates, 2));
         }
+
+        if (!gameState.GameLogicData.TryGetData(__instance.Type, out var conduitData)) return;
+
+        if (conduitData.HasAbility(AMain.Maxed))
+        {
+            for (int i = 0; i < conduitData.maxLevel; i++)
+            {
+                gameState.ActionStack.Add(new ImprovementLevelUpAction(__instance.PlayerId, __instance.Coordinates));
+            }
+        }
 	}
 }

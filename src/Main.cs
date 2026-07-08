@@ -70,6 +70,7 @@ public static class Main
             || !EnumCache<ImprovementAbility.Type>.TryGetType("lightning_improvementability", out Lightning)
             || !EnumCache<ImprovementAbility.Type>.TryGetType("electric_improvementability", out Electric)
             || !EnumCache<ImprovementAbility.Type>.TryGetType("collect_improvementability", out Collect)
+            || !EnumCache<ImprovementAbility.Type>.TryGetType("maxed_improvementability", out Maxed)
 
             || !EnumCache<ImprovementData.Type>.TryGetType("animacollect_improvement", out Ritual)
 
@@ -137,6 +138,7 @@ public static class Main
     public static ImprovementAbility.Type Lightning;
     public static ImprovementAbility.Type Electric;
     public static ImprovementAbility.Type Collect;
+    public static ImprovementAbility.Type Maxed;
     public static ImprovementData.Type Ritual;
     public static UnitAbility.Type Excavate;
 

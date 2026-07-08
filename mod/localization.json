@@ -100,13 +100,16 @@
     },
 
     "building_ability_lightning__improvementability": {
-        "English": "{0} gets struck by lightning on the beginning of every turn, and powers adjacent infrastructure."
+        "English": "{0} gets struck by lightning on the beginning of every turn. Lightning either charges chargeable units standing on {0}, or powers adjacent infrastructure. If there is no adjacent building that uses the lightning up, it explodes, dealing 10 damage to nearby units, or 15 point-blank."
     },
     "building_ability_electric__improvementability": {
         "English": "{0} uses power from adjacent lightning to gain 1 level."
     },
     "building_ability_collect__improvementability": {
         "English": "You can collect 1 population from {0} once at max level."
+    },
+    "building_ability_maxed__improvementability": {
+        "English": "When built, {0} gets leveled up to its maximum level."
     },
 
     "action_info_excavatecommand": {
@@ -141,14 +144,17 @@
     "technology_names_sentry__secrettech": {
         "English": "Redirection"
     },
-    "technology_names_forestry__tech": {
-        "English": "Forestry"
+    "technology_names_lightning__tech": {
+        "English": "Ḻightning"
     },
     "technology_names_animation__tech": {
         "English": "Ænimation"
     },
     "technology_names_lunacy__tech": {
         "English": "Ḻunacy"
+    },
+    "technology_names_archery__tech": {
+        "English": "Archery"
     },
 
     "wcontroller_reward_highvoltage__secretreward": {

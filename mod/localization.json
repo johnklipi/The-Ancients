@@ -99,6 +99,16 @@
         "English": "Ænimarket"
     },
 
+    "building_ability_lightning__improvementability": {
+        "English": "{0} gets struck by lightning on the beginning of every turn, and powers adjacent infrastructure."
+    },
+    "building_ability_electric__improvementability": {
+        "English": "{0} uses power from adjacent lightning to gain 1 level."
+    },
+    "building_ability_collect__improvementability": {
+        "English": "You can collect 1 population from {0} once at max level."
+    },
+
     "action_info_excavatecommand": {
         "English": "Excavate"
     },
@@ -164,6 +174,6 @@
         "English": "Thought to be long defeated, the Ancients rise again! These descendants of the old Polytopian Empire will do anything to restore their rule."
     },
     "tribes_info2__ancients": {
-        "English": "The {0} have the ability and audacity to use forbidden lunar-lightning magic to create lifeforce out of thin air, power ancient technology, and smite anyone standing in their way of rebuilding their empire!"
+        "English": "The {0} have the ability to use forbidden lunar-lightning magic to create lifeforce out of thin air, power ancient technology, and electrocute anyone standing in their way of rebuilding their empire!"
     }
 }

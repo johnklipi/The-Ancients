@@ -823,8 +823,8 @@
 				}
 			],
             "improvementAbilities": [
-                "limited",
-                "lightning_improvementability"
+                "lightning_improvementability",
+                "limited"
             ],
 			"maxLevel": 0,
 			"idx": -1

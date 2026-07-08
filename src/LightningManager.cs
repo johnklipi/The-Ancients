@@ -129,8 +129,9 @@ public static class LightningManager
         {
             for (int i = 0; i < conduitData.maxLevel; i++)
             {
-                gameState.ActionStack.Add(new ImprovementLevelUpAction(__instance.PlayerId, __instance.Coordinates));
+                __instance.AddSubAction(new ImprovementLevelUpAction(__instance.PlayerId, __instance.Coordinates));
             }
+            __instance.CommitSubActionsToStack(gameState.ActionStack);
         }
 	}
 }

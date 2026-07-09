@@ -201,64 +201,6 @@ public static class Main
             }
         }
 	}
-
-	[HarmonyPostfix]
-    [HarmonyPatch(typeof(AttackAction), nameof(AttackAction.Execute))]
-    private static void AttackAction_Execute(GameState state, AttackAction __instance)
-	{
-		UnitState attacker = state.Map.GetTile(__instance.Origin).unit;
-		UnitState defender = state.Map.GetTile(__instance.Target).unit;
-
-        if (attacker.HasAbility(Shock))
-        {
-            ApplyConductionAction action = PolibActionManager.MakeIl2CppAction<ApplyConductionAction>();
-            action.PlayerId = attacker.owner;
-            action.Coordinates = defender.coordinates;
-            action.Origin = attacker.coordinates;
-            state.ActionStack.Add(action);
-
-            if (attacker.HasAbility(UnitAbility.Type.Splash))
-            {
-                state.TryGetPlayer(__instance.PlayerId, out var player);
-                foreach (TileData tile in state.Map.GetArea(__instance.Target, 1, true, false))
-                {
-                    if (tile.unit != null && !player.HasPeaceWith(tile.unit.owner) && tile.unit.owner != __instance.PlayerId)
-                    {
-                        ApplyConductionAction action1 = PolibActionManager.MakeIl2CppAction<ApplyConductionAction>();
-                        action1.PlayerId = attacker.owner;
-                        action1.Coordinates = tile.coordinates;
-                        action1.Origin = attacker.coordinates;
-                        state.ActionStack.Add(action1);
-                    }
-                }
-            }
-        }
-	}
-
-    [HarmonyPrefix]
-    [HarmonyPatch(typeof(ActionUtils), nameof(ActionUtils.KillUnit))]
-    private static void ActionUtils_KillUnit(GameState gameState, TileData tile)
-	{
-        if (tile.unit == null || !gameState.TryGetPlayer(tile.unit.owner, out var player))
-        {
-            return;
-        }
-        if (tile.unit.HasEffect(Conductive))
-        {
-            foreach (TileData tile1 in gameState.Map.GetArea(tile.coordinates, 1, true, false))
-            {
-                if (tile1.unit != null && tile1.unit.owner == tile.unit.owner)
-                {
-                    gameState.ActionStack.Add(new AttackAction(tile.unit.owner, tile1.coordinates, tile1.coordinates, 50, false, AttackAction.AnimationType.Splash, 20));
-                    ApplyConductionAction action = PolibActionManager.MakeIl2CppAction<ApplyConductionAction>();
-                    action.PlayerId = tile.unit.owner;
-                    action.Coordinates = tile1.coordinates;
-                    action.Origin = tile.coordinates;
-                    gameState.ActionStack.Add(action);
-                }
-            }
-        }
-	}
     
     [HarmonyPrefix]
     [HarmonyPatch(typeof(AttackCommand), nameof(AttackCommand.ExecuteDefault))]

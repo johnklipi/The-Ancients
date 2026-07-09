@@ -7,7 +7,7 @@
    viewBox="0 0 135.46667 135.46667"
    version="1.1"
    id="svg1"
-   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
    sodipodi:docname="weapons.svg"
    xml:space="preserve"
    inkscape:export-filename="../mod/weapon_club_railcannon_unit__.png"
@@ -27,15 +27,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#505050"
      inkscape:document-units="mm"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="-120.20815"
-     inkscape:cy="94.752309"
+     inkscape:zoom="2.0000001"
+     inkscape:cx="282.74999"
+     inkscape:cy="207.49999"
      inkscape:window-width="1920"
      inkscape:window-height="1052"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer10"
+     inkscape:current-layer="layer13"
      showgrid="true"><inkscape:grid
        type="axonomgrid"
        id="grid1"
@@ -300,7 +300,7 @@
        id="image1"
        x="-26.287205"
        y="-50.877567"
-       style="display:none" /><image
+       style="display:inline" /><image
        width="45.428951"
        height="48.058281"
        preserveAspectRatio="none"
@@ -345,7 +345,8 @@
      id="layer5"
      inkscape:label="Railcannon"
      transform="matrix(1.5859153,0,0,1.5859153,-37.148055,-43.63308)"
-     style="display:none"><g
+     style="display:none"
+     sodipodi:insensitive="true"><g
        inkscape:groupmode="layer"
        id="layer3"
        inkscape:label="Railcannon"
@@ -504,7 +505,8 @@
      inkscape:label="Railgun"
      inkscape:highlight-color="#3da5e1"
      transform="matrix(1.1133648,0,0,1.1133648,-5.3255283,-12.484606)"
-     style="display:inline"><path
+     style="display:none"
+     sodipodi:insensitive="true"><path
        id="path177"
        style="display:none;fill:#f9f9f9;fill-opacity:1;stroke:#ffffff;stroke-width:8.98178;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter223)"
        d="m 28.881757,39.49895 -3.928071,0.08912 -3.142272,1.852409 -3.02577,6.317033 4.382006,8.913004 4.123942,3.174298 1.307036,-0.68508 1.150155,-1.945702 3.324217,2.055704 0.0023,0.0019 9.253687,6.654003 3.507555,4.139259 53.063079,30.308302 10.220039,4.09238 3.15713,-1.80043 V 98.712434 L 101.82284,93.637921 74.180595,77.665249 74.133716,75.794274 54.910626,64.66265 l -4.423315,-5.104683 -4.79092,0.07658 5.846389,-0.09376 19.504362,11.132088 1.521472,-0.860527 26.307821,14.822053 10.266455,6.875401 3.18033,-1.847767 V 85.733507 L 102.12917,78.118256 48.947737,47.625226 45.579426,47.871224 33.044687,40.902065 Z"
@@ -753,6 +755,9 @@
        d="m 42.352894,57.558829 9.324558,-0.197502 -9.342378,-3.993444 z"
        id="path163"
        sodipodi:nodetypes="cccc" /></g><g
+     inkscape:groupmode="layer"
+     id="layer13"
+     inkscape:label="Archeologist" /><g
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="Club"

@@ -3,7 +3,8 @@
     "name": "Ancients",
     "version": "0.1",
     "authors": [
-        "wasd_"
+        "wasd_",
+        "cleigh (sprite help)"
     ],
     "dependencies": [
         {

@@ -93,7 +93,13 @@
     "lightningrod_improvement__": {
         "pivot": [0.5, 0.15]
     },
-    "electrode_improvement__": {
-        "pivot": [0.5, 0.4]
+    "animaconduit_improvement__0": {
+        "pivot": [0.5, 0.35]
+    },
+    "animaconduit_improvement__1": {
+        "pivot": [0.5, 0.35]
+    },
+    "animaconduit_improvement__2": {
+        "pivot": [0.5, 0.35]
     }
 }

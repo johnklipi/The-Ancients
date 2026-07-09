@@ -26,9 +26,6 @@
     "unit_names_sentry__unit": {
         "English": "Sentry"
     },
-    "unit_names_sapper__unit": {
-        "English": "Sapper"
-    },
     "unit_names_spark__unit": {
         "English": "Jumpspark"
     },
@@ -137,9 +134,6 @@
     },
     "technology_names_drone__secrettech": {
         "English": "Aviation"
-    },
-    "technology_names_sapper__secrettech": {
-        "English": "Charge Logistics"
     },
     "technology_names_sentry__secrettech": {
         "English": "Redirection"

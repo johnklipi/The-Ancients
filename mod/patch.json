@@ -464,13 +464,6 @@
 			"cost": 0,
 			"idx": -1
         },
-        "sapper_secrettech": {
-            "unitUnlocks": [
-                "sapper_unit"
-            ],
-			"cost": 0,
-			"idx": -1
-        },
         "sentry_secrettech": {
             "unitUnlocks": [
                 "sentry_unit"
@@ -745,29 +738,6 @@
 			"idx": -1,
 
             "prefab": "spark"
-        },
-
-        "sapper_unit": {
-            "idx": -1,
-            "health": 100,
-            "defence": 10,
-            "movement": 3,
-            "range": 1,
-            "attack": 1,
-            "cost": 5,
-            "unitAbilities": [
-                "land",
-                "static",
-                "dash",
-                "capacitor_ability",
-                "creep",
-                "sneak"
-            ],
-            "weapon": 1,
-            "prefab": "rider",
-
-            "maxCharge": 1,
-            "chargeConsumptionAmount": 1
         }
     },
     "unitAbility": {
@@ -942,10 +912,6 @@
             "level": 0
         },
         "chargestorage_secretreward": {
-            "idx": -1,
-            "level": 0
-        },
-        "logistics_secretreward": {
             "idx": -1,
             "level": 0
         },

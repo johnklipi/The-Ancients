@@ -36,7 +36,8 @@
                 "catapult": "railcannon_unit",
                 "knight": "spark_unit",
                 "archer": "archer_unit",
-                "rider": "rider_unit"
+                "rider": "rider_unit",
+                "giant": "mjolnir_unit"
             },
             "improvementOverrides":{
                 "market": "animarket_improvement"
@@ -738,6 +739,28 @@
 			"idx": -1,
 
             "prefab": "spark"
+        },
+
+        "mjolnir_unit": {
+            "health": 300,
+			"defence": 40,
+			"movement": 1,
+			"range": 1,
+			"attack": 40,
+			"cost": 8,
+			"weapon": 7,
+			"unitAbilities": [
+				"land",
+                "static",
+                "surprise",
+                "splash",
+                "polib_lazy",
+                "push_ability"
+			],
+            "hidden": true,
+			"idx": -1,
+
+            "prefab": "swordsman"
         }
     },
     "unitAbility": {
@@ -766,6 +789,10 @@
         },
 
         "protect_ability": {
+            "idx": -1
+        },
+
+        "push_ability": {
             "idx": -1
         }
     },

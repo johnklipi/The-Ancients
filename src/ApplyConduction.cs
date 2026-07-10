@@ -108,8 +108,10 @@ public class ApplyConductionReaction : PolibReactionBase
         if (instance != null && !instance.IsHidden)
         {
             instance.Render();
-            instance.Sway();
-            GameManager.DelayCall(200, onComplete);
+            VFXManager.EnsureCustomPuffRegistered("ChargePuff", "Puff");
+            instance.DoPuff("ChargePuff", instance.transform, instance.VisualCenterObject.localPosition);
+            GameManager.DelayCall(50, onComplete);
+            return;
         }
 
         onComplete.Invoke();

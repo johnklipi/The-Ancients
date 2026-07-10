@@ -14,7 +14,7 @@ public static class ConductionManager
 
     [HarmonyPostfix]
     [HarmonyPatch(typeof(AttackCommand), nameof(AttackCommand.ExecuteDefault))]
-    private static void AttackAction_Execute(GameState gameState, AttackCommand __instance)
+    private static void AttackCommand_Execute(GameState gameState, AttackCommand __instance)
 	{
 		UnitState attacker = gameState.Map.GetTile(__instance.Origin).unit;
 		UnitState defender = gameState.Map.GetTile(__instance.Target).unit;

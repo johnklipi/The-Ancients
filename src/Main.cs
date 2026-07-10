@@ -35,6 +35,7 @@ public static class Main
         PolibActionManager.RegisterAction<ChargeAction>("chargeaction");
         PolibActionManager.RegisterAction<LightningStrikeAction>("lightningstrikeaction");
         PolibActionManager.RegisterAction<ApplyConductionAction>("applyconductionaction");
+        PolibActionManager.RegisterAction<PushAction>("pushaction");
 
         PolibReactionManager.AssignReaction<DischargeReaction>("dischargeaction");
         PolibReactionManager.AssignReaction<ExcavateReaction>("excavateaction");
@@ -244,6 +245,15 @@ public static class Main
         }
         return true;
 	}
+
+    [HarmonyPrefix]
+    [HarmonyPatch(typeof(ActionUtils), nameof(ActionUtils.KillUnit))]
+    private static bool ActionUtils_KillUnit_NullCheck(GameState gameState, TileData tile) //why does this not have a nullcheck ingame??
+    {
+        if (tile.unit == null) return false;
+
+        return true;
+    }
 }
 
 

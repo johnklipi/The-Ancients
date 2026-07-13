@@ -91,11 +91,11 @@
     },
     "weapon_club_archeologist_unit__": {
         "pixelsPerUnit": 1500,
-        "pivot": [0.6, 0.3]
+        "pivot": [0.65, 0.3]
     },
     "weapon_club_archeologist_unit_outline__": {
         "pixelsPerUnit": 1500,
-        "pivot": [0.6, 0.3]
+        "pivot": [0.65, 0.3]
     },
 
     "lightningrod_improvement__": {

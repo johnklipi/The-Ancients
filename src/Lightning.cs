@@ -1,9 +1,7 @@
 using BepInEx.Logging;
 using HarmonyLib;
 using Polytopia.Data;
-using Polibrary;
-using PolibMain = Polibrary.Main;
-using AMain = Ancients.Main;
+using Polibrary.PolyScript;
 using Il2Gen = Il2CppSystem.Collections.Generic;
 using Ancients;
 
@@ -34,7 +32,7 @@ public class LightningStrikeAction : PolibActionBase
     {
         TileData origin = state.Map.GetTile(Coordinates);
 
-        if (origin.unit != null && origin.unit.HasAbility(AMain.Capacitor) && ChargeManager.GetChargeCount(origin.unit) < ChargeManager.GetMaxCharge(origin.unit.type))
+        if (origin.unit != null && origin.unit.HasAbility(Main.Capacitor) && ChargeManager.GetChargeCount(origin.unit) < ChargeManager.GetMaxCharge(origin.unit.type))
         {
             ChargeAction action = PolibActionManager.MakeIl2CppAction<ChargeAction>();
             action.PlayerId = origin.unit.owner;
@@ -46,8 +44,6 @@ public class LightningStrikeAction : PolibActionBase
 
         Il2Gen.List<TileData> rodNeighbors = state.Map.GetArea(Coordinates, 1, true, false);
 
-        int groundingImprovementCount = 0;
-
         foreach (TileData rodNeighbor in rodNeighbors)
         {
             if (rodNeighbor == null) continue;
@@ -56,33 +52,13 @@ public class LightningStrikeAction : PolibActionBase
             continue;
 
             ImprovementData rodNeighborData = state.GameLogicData.GetImprovementData(rodNeighbor.improvement.type);
-            if (!rodNeighborData.HasAbility(AMain.Electric))
+            if (!rodNeighborData.HasAbility(Main.Electric))
             continue;
 
             if (rodNeighbor.improvement.level < rodNeighborData.maxLevel)
             {
                 state.ActionStack.Add(new ImprovementLevelUpAction(state.CurrentPlayer, rodNeighbor.coordinates));
             }
-            
-            groundingImprovementCount++;
-        }
-
-        if (groundingImprovementCount == 0)
-        {
-            Il2Gen.List<TileData> tileNeighbors = state.Map.GetTileNeighbors(Coordinates);
-
-            foreach (TileData tile1 in tileNeighbors)
-            {
-                if (tile1 == null) continue;
-                
-                if (tile1.unit != null)
-                {
-                    state.ActionStack.Add(new AttackAction(PlayerId, tile1.coordinates, tile1.coordinates, 100, false, AttackAction.AnimationType.Splash));
-                }
-            }
-            
-            if (origin.unit != null)
-            state.ActionStack.Add(new AttackAction(PlayerId, Coordinates, Coordinates, 150, false, AttackAction.AnimationType.Splash));
         }
     }
 
@@ -166,7 +142,7 @@ public class LightningStrikeReaction : PolibReactionBase
             }
             else
             {
-                AMain.modLogger.LogInfo("can't find lightning sfx");
+                Main.modLogger.LogInfo("can't find lightning sfx");
             }
             AudioManager.PlaySFXAtTile(SFXTypes.FireImpact, originTileData.coordinates);
 
@@ -175,15 +151,13 @@ public class LightningStrikeReaction : PolibReactionBase
             originTileInstance.DoPuff("DischargePuff", originTileInstance.transform, originTileInstance.VisualCenterObject.localPosition);
         }
 
-        if (originTileData.unit != null && originTileData.unit.HasAbility(AMain.Capacitor)  && ChargeManager.GetChargeCount(originTileData.unit) < ChargeManager.GetMaxCharge(originTileData.unit.type))
+        if (originTileData.unit != null && originTileData.unit.HasAbility(Main.Capacitor)  && ChargeManager.GetChargeCount(originTileData.unit) < ChargeManager.GetMaxCharge(originTileData.unit.type))
         {
             GameManager.DelayCall(200, onComplete);
             return;
         }
 
         Il2Gen.List<TileData> rodAreaTiles = GameManager.GameState.Map.GetArea(action.Coordinates, 1, true, false);
-
-        int groundingImprovementCount = 0;
 
         foreach (TileData rodNeighbourTileData in rodAreaTiles)
         {
@@ -199,7 +173,7 @@ public class LightningStrikeReaction : PolibReactionBase
             if (!GameManager.GameState.GameLogicData.TryGetData(rodNeighbourTileData.improvement.type, out var data))
             continue;
 
-            if (!data.HasAbility(AMain.Electric))
+            if (!data.HasAbility(Main.Electric))
             continue;
 
             rodNeighbourTileInstance.Render();
@@ -208,30 +182,7 @@ public class LightningStrikeReaction : PolibReactionBase
             {
                 VFXManager.EnsureCustomPuffRegistered("ChargePuff", "Puff");
                 rodNeighbourTileInstance.DoPuff("ChargePuff", rodNeighbourTileInstance.transform, rodNeighbourTileInstance.VisualCenterObject.localPosition);
-                AudioManager.PlaySFXAtTile(SFXTypes.Plop, originTileData.coordinates);
             }));
-
-            groundingImprovementCount++;
-        }
-
-        if (groundingImprovementCount == 0)
-        {
-            Il2Gen.List<TileData> rodNeighbors = GameManager.GameState.Map.GetTileNeighbors(action.Coordinates);
-
-            foreach (TileData rodNeighborTileData in rodNeighbors)
-            {
-                if (rodNeighborTileData == null) continue;
-                Tile instance2 = rodNeighborTileData.GetInstance();
-
-                if (instance2 != null && !instance2.IsHidden)
-                instance2.Sway(0.1f);
-            }
-
-            if (originTileInstance != null && !originTileInstance.IsHidden)
-            {
-                originTileInstance.Sway();
-                originTileInstance.SpawnAreaDamage();
-            }
         }
 
         GameManager.DelayCall(200, onComplete);

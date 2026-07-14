@@ -1,10 +1,8 @@
 using BepInEx.Logging;
 using HarmonyLib;
 using Polytopia.Data;
-using Polibrary;
-using PolibMain = Polibrary.Main;
+using Polibrary.PolyScript;
 using Il2Gen = Il2CppSystem.Collections.Generic;
-using UnityEngine;
 
 public class DischargeCommand : PolibCommandBase
 {
@@ -190,7 +188,7 @@ public class DischargeReaction : PolibReactionBase
             }
             else if (action.Level == 1)
             {
-                PolibUtils.ShakeCamera(0.1f, 0.5f);
+                Polibrary.PolibUtils.ShakeCamera(0.1f, 0.5f);
 
                 instance.SpawnAreaDamage();
                 
@@ -204,7 +202,7 @@ public class DischargeReaction : PolibReactionBase
             }
             else if (action.Level == 2)
             {
-                PolibUtils.ShakeCamera(0.1f, 1f);
+                Polibrary.PolibUtils.ShakeCamera(0.1f, 1f);
 
                 VFXManager.EnsureCustomPuffRegistered("DischargePuffLarge", "Puff");
                 instance.DoPuff("DischargePuffLarge", instance.transform, instance.VisualCenterObject.localPosition);

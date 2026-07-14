@@ -1,10 +1,7 @@
 using BepInEx.Logging;
 using HarmonyLib;
 using Polytopia.Data;
-using Polibrary;
-using PolibMain = Polibrary.Main;
-using AMain = Ancients.Main;
-using Il2Gen = Il2CppSystem.Collections.Generic;
+using Polibrary.PolyScript;
 using Ancients;
 
 public class ChargeAction : PolibActionBase
@@ -41,14 +38,14 @@ public class ChargeAction : PolibActionBase
         {
             if (ChargeManager.GetChargeCount(tile.unit) < ChargeManager.GetMaxCharge(tile.unit.type))
             {
-                tile.unit.effects.Add(AMain.Charged);
+                tile.unit.effects.Add(Main.Charged);
             }
         }
         else
         {
             for (int i = 0; i < ChargeManager.GetChargeConsumptionAmount(tile.unit.type); i++)
             {
-                tile.unit.RemoveEffect(AMain.Charged);
+                tile.unit.RemoveEffect(Main.Charged);
             }
         }
     }

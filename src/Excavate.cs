@@ -1,11 +1,9 @@
 using BepInEx.Logging;
 using HarmonyLib;
 using Polytopia.Data;
-using Polibrary;
-using PolibMain = Polibrary.Main;
-using AMain = Ancients.Main;
+using Polibrary.PolyScript;
 using Il2Gen = Il2CppSystem.Collections.Generic;
-using Il2CppSystem;
+using Ancients;
 
 public class ExcavateCommand : PolibCommandBase
 {
@@ -150,7 +148,7 @@ public class ExcavateReaction : PolibReactionBase
             if (action != null)
             this.action = action;
             else
-            AMain.modLogger.LogInfo("shits fucked");
+            Main.modLogger.LogInfo("shits fucked");
         } 
     }
     public ExcavateReaction(System.IntPtr ptr) : base(ptr) {}

@@ -1,22 +1,8 @@
 using BepInEx.Logging;
 using HarmonyLib;
-using Il2CppInterop.Runtime.Injection;
 using Polytopia.Data;
-using UnityEngine;
-using UnityEngine.Rendering.RenderGraphModule.NativeRenderPassCompiler;
-using Newtonsoft.Json.Linq;
-using Polibrary;
 using Il2Gen = Il2CppSystem.Collections.Generic;
-using Il2CppSystem.Linq;
-using MS.Internal.Xml.XPath;
-using PolytopiaBackendBase.Common;
-using System.Data;
-using Steamworks.Data;
-using Il2CppSystem;
-using System.Timers;
-using Il2CppMono.Security.Interface;
-using Polibrary.Parsing;
-using AMain = Ancients.Main;
+using Polibrary.PolyScript;
 
 
 namespace Ancients;
@@ -34,7 +20,7 @@ public static class ChargeManager
 
         foreach (UnitEffect effect in unit.effects)
         {
-            if (effect == AMain.Charged)
+            if (effect == Main.Charged)
             {
                 charges++;
             }
@@ -46,20 +32,20 @@ public static class ChargeManager
     public static int GetMaxCharge(UnitData.Type unit)
     {
         int i = 3;
-        AMain.MaxCharge.TryGetValue(unit, out i);
+        Main.MaxCharge.TryGetValue(unit, out i);
         return i;
     }
 
     public static int GetChargeConsumptionAmount(UnitData.Type unit)
     {
         int i = 3;
-        AMain.ChargeConsumptionAmount.TryGetValue(unit, out i);
+        Main.ChargeConsumptionAmount.TryGetValue(unit, out i);
         return i;
     }
 
     public static bool DoesConsume(UnitData.Type unit, string e)
     {
-        if (!AMain.ChargeConsumptionEvent.TryGetValue(unit, out var strings))
+        if (!Main.ChargeConsumptionEvent.TryGetValue(unit, out var strings))
         return false;
 
         return strings.Contains(e);
@@ -67,7 +53,7 @@ public static class ChargeManager
 
     public static bool GetsChargeBuff(UnitData.Type unit, string e)
     {
-        if (AMain.ChargeBuff.TryGetValue(unit, out var strings))
+        if (Main.ChargeBuff.TryGetValue(unit, out var strings))
         {
             return strings.Contains(e);
         }
@@ -81,7 +67,7 @@ public static class ChargeManager
 
         for (int i = 0; i < consumption; i++)
         {
-            unit.effects.Remove(AMain.Charged);
+            unit.effects.Remove(Main.Charged);
         }
     }
 
@@ -93,13 +79,13 @@ public static class ChargeManager
         if (unit == null) return;
 
 		Il2Gen.List<TileData> list = gameState.Map.GetArea(position, range, true, false);
-		if (unit.HasAbility(AMain.Charge))
+		if (unit.HasAbility(Main.Charge))
 		{
 			foreach (TileData tile in list)
 			{
 				if (tile.unit == null) continue;
 
-				if (tile.unit.HasAbility(AMain.Capacitor))
+				if (tile.unit.HasAbility(Main.Capacitor))
 				{
                     if (GetChargeCount(tile.unit) < GetMaxCharge(tile.unit.type))
                     {
@@ -119,7 +105,7 @@ public static class ChargeManager
 
         if (attacker == null || defender == null) return;
 
-		if (attacker.HasAbility(AMain.Charge) && defender.HasAbility(AMain.Capacitor))
+		if (attacker.HasAbility(Main.Charge) && defender.HasAbility(Main.Capacitor))
 		{
             ChargeAction action = PolibActionManager.MakeIl2CppAction<ChargeAction>();
             action.PlayerId = defender.owner;
@@ -128,7 +114,7 @@ public static class ChargeManager
             state.ActionStack.Add(action);
 		}
 
-        if (attacker.HasAbility(AMain.Capacitor) && DoesConsume(attacker.type, "attack"))
+        if (attacker.HasAbility(Main.Capacitor) && DoesConsume(attacker.type, "attack"))
         {
             ChargeAction action = PolibActionManager.MakeIl2CppAction<ChargeAction>();
             action.PlayerId = attacker.owner;
@@ -143,7 +129,7 @@ public static class ChargeManager
     private static void ChargeLoss_MoveAction(GameState gameState, MoveAction __instance)
 	{
 		if (!gameState.TryGetUnit(__instance.UnitId, out var unit)) return;
-        if (unit.HasAbility(AMain.Capacitor) && DoesConsume(unit.type, "move") && __instance.Reason == MoveAction.MoveReason.Command)
+        if (unit.HasAbility(Main.Capacitor) && DoesConsume(unit.type, "move") && __instance.Reason == MoveAction.MoveReason.Command)
         {
             ChargeAction action = PolibActionManager.MakeIl2CppAction<ChargeAction>();
             action.PlayerId = unit.owner;
@@ -161,7 +147,7 @@ public static class ChargeManager
 
         foreach (UnitEffect effect in unitState.effects)
         {
-            if (effect == AMain.Charged)
+            if (effect == Main.Charged)
             {
                 __result++;
             }
@@ -176,7 +162,7 @@ public static class ChargeManager
 
         foreach (UnitEffect effect in unitState.effects)
         {
-            if (effect == AMain.Charged)
+            if (effect == Main.Charged)
             {
                 __result += 50;
             }
@@ -195,7 +181,7 @@ public static class ChargeManager
         int newrange = range;
         foreach (UnitEffect effect in unit.effects)
         {
-            if (effect == AMain.Charged)
+            if (effect == Main.Charged)
             {
                 newrange++;
             }

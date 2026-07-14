@@ -97,7 +97,7 @@
     },
 
     "building_ability_lightning__improvementability": {
-        "English": "{0} gets struck by lightning on the beginning of every turn. Lightning either charges chargeable units standing on {0}, or powers adjacent infrastructure. If there is no adjacent building that uses the lightning up, it explodes, dealing 10 damage to nearby units, or 15 point-blank."
+        "English": "{0} gets struck by lightning on the beginning of every turn. Lightning either charges chargeable units standing on {0}, or powers adjacent infrastructure."
     },
     "building_ability_electric__improvementability": {
         "English": "{0} uses power from adjacent lightning to gain 1 level."

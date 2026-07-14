@@ -1,11 +1,7 @@
 using BepInEx.Logging;
 using HarmonyLib;
 using Polytopia.Data;
-using Polibrary;
-using PolibMain = Polibrary.Main;
-using AMain = Ancients.Main;
-using Il2Gen = Il2CppSystem.Collections.Generic;
-using UnityEngine.Tilemaps;
+using Polibrary.PolyScript;
 using Ancients;
 
 public class ApplyConductionAction : PolibActionBase
@@ -39,7 +35,7 @@ public class ApplyConductionAction : PolibActionBase
 
         if (tile != null && tile.unit != null)
         {
-            tile.unit.AddEffect(AMain.Conductive);
+            tile.unit.AddEffect(Main.Conductive);
         }
     }
 
@@ -81,7 +77,7 @@ public class ApplyConductionReaction : PolibReactionBase
             if (ApplyConductionAction != null)
             this.action = ApplyConductionAction;
             else
-            AMain.modLogger.LogInfo("shits fucked");
+            Main.modLogger.LogInfo("shits fucked");
         } 
     }
     public ApplyConductionReaction(IntPtr ptr) : base(ptr) {}

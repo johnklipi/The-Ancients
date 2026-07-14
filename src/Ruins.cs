@@ -1,11 +1,9 @@
 using BepInEx.Logging;
 using HarmonyLib;
 using Polytopia.Data;
-using Polibrary;
-using PolibMain = Polibrary.Main;
-using AMain = Ancients.Main;
+using Polibrary.PolyScript;
 using Il2Gen = Il2CppSystem.Collections.Generic;
-using UnityEngine.UIElements.UIR;
+using Ancients;
 
 public static class RuinPatcher
 {
@@ -22,7 +20,7 @@ public static class RuinPatcher
         {
             return true;
         }
-        if (player.tribe != AMain.Ancients) return true;
+        if (player.tribe != Main.Ancients) return true;
 
 
         AncientsExamineAction action = PolibActionManager.MakeIl2CppAction<AncientsExamineAction>();
@@ -51,7 +49,7 @@ public static class RuinPatcher
                 
                 int num = 0;
 
-                foreach (TechData.Type tech in AMain.Techs)
+                foreach (TechData.Type tech in Main.Techs)
                 {
                     if (!player.HasTech(tech))
                     {
@@ -70,7 +68,7 @@ public static class RuinPatcher
                 {
                     rewards = new CityReward[1]
                     {
-                        AMain.SecretRewards[AMain.Techs.LastIndexOf(eligibleTechs[0])]
+                        Main.SecretRewards[Main.Techs.LastIndexOf(eligibleTechs[0])]
                     };
                 }
                 else
@@ -84,8 +82,8 @@ public static class RuinPatcher
                         eligibleTechs[i] = value;
                     }
 
-                    rewards[0] = AMain.SecretRewards[AMain.Techs.LastIndexOf(eligibleTechs[0])];
-                    rewards[1] = AMain.SecretRewards[AMain.Techs.LastIndexOf(eligibleTechs[1])];
+                    rewards[0] = Main.SecretRewards[Main.Techs.LastIndexOf(eligibleTechs[0])];
+                    rewards[1] = Main.SecretRewards[Main.Techs.LastIndexOf(eligibleTechs[1])];
                 }
                 if (num != 0)
                 {
@@ -124,7 +122,7 @@ public static class RuinPatcher
     [HarmonyPatch(typeof(CityRewardCommand), nameof(CityRewardCommand.IsValid))]
     private static bool CityRewardCommand_IsValid(GameState gameState, out string validationError, CityRewardCommand __instance, ref bool __result)
     {
-        if (AMain.SecretRewards.Contains(__instance.Reward))
+        if (Main.SecretRewards.Contains(__instance.Reward))
         {
             __result = true;
             validationError = "";
@@ -138,9 +136,9 @@ public static class RuinPatcher
     [HarmonyPatch(typeof(CityRewardAction), nameof(CityRewardAction.Execute))]
     private static bool CityRewardActionPatch(GameState state, CityRewardAction __instance)
     {
-        if (AMain.SecretRewards.Contains(__instance.Reward))
+        if (Main.SecretRewards.Contains(__instance.Reward))
         {
-            TechData.Type type = AMain.Techs[AMain.SecretRewards.LastIndexOf(__instance.Reward)];
+            TechData.Type type = Main.Techs[Main.SecretRewards.LastIndexOf(__instance.Reward)];
             state.ActionStack.Add(new ResearchAction(__instance.PlayerId, type, 0));
             return false;
         }
@@ -151,7 +149,7 @@ public static class RuinPatcher
     [HarmonyPatch(typeof(CityRewardReaction), nameof(CityRewardReaction.Execute))]
     private static bool CityRewardReactionPatch(Il2CppSystem.Action onComplete, CityRewardReaction __instance)
     {
-        if (AMain.SecretRewards.Contains(__instance.action.Reward))
+        if (Main.SecretRewards.Contains(__instance.action.Reward))
         {
             onComplete.Invoke();
             return false;
@@ -164,9 +162,9 @@ public static class RuinPatcher
     [HarmonyPatch(typeof(GameLogicData), nameof(GameLogicData.GetUnlockableTech))]
     private static void SecretTechUnlockabilityFix(Il2Gen.List<TechData> __result, PlayerState player, GameState gameState)
     {
-        if(player.tribe == AMain.Ancients)
+        if(player.tribe == Main.Ancients)
         {
-            foreach (TechData.Type type in AMain.Techs)
+            foreach (TechData.Type type in Main.Techs)
             {
                 gameState.GameLogicData.TryGetData(type, out var data);
                 __result.Add(data);
@@ -225,7 +223,7 @@ public class AncientsExamineAction : PolibActionBase
 
         int techCounter = 0;
 
-        foreach (TechData.Type tech in AMain.Techs)
+        foreach (TechData.Type tech in Main.Techs)
         {
             if (player.availableTech.Contains(tech))
             {
@@ -233,7 +231,7 @@ public class AncientsExamineAction : PolibActionBase
             }
         }
 
-        if (techCounter < AMain.Techs.Count)
+        if (techCounter < Main.Techs.Count)
         {
             CommandTrigger commandTrigger = new CommandTrigger
             {
@@ -282,7 +280,7 @@ public class AncientsExamineReaction : PolibReactionBase
             if (action != null)
             this.action = action;
             else
-            AMain.modLogger.LogInfo("shits fucked");
+            Main.modLogger.LogInfo("shits fucked");
         } 
     }
     public AncientsExamineReaction(IntPtr ptr) : base(ptr) {}

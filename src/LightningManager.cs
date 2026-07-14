@@ -1,22 +1,8 @@
 using BepInEx.Logging;
 using HarmonyLib;
-using Il2CppInterop.Runtime.Injection;
 using Polytopia.Data;
-using UnityEngine;
-using UnityEngine.Rendering.RenderGraphModule.NativeRenderPassCompiler;
-using Newtonsoft.Json.Linq;
-using Polibrary;
+using Polibrary.PolyScript;
 using Il2Gen = Il2CppSystem.Collections.Generic;
-using Il2CppSystem.Linq;
-using MS.Internal.Xml.XPath;
-using PolytopiaBackendBase.Common;
-using System.Data;
-using Steamworks.Data;
-using Il2CppSystem;
-using System.Timers;
-using Il2CppMono.Security.Interface;
-using Polibrary.Parsing;
-using AMain = Ancients.Main;
 
 
 namespace Ancients;
@@ -36,7 +22,7 @@ public static class LightningManager
         {
             if (tile.improvement != null && tile.owner == __instance.PlayerId)
             {
-                if (gameState.GameLogicData.GetImprovementData(tile.improvement.type).HasAbility(AMain.Lightning))
+                if (gameState.GameLogicData.GetImprovementData(tile.improvement.type).HasAbility(Main.Lightning))
                 {
                     LightningStrikeAction action = PolibActionManager.MakeIl2CppAction<LightningStrikeAction>();
                     action.PlayerId = __instance.PlayerId;
@@ -67,11 +53,11 @@ public static class LightningManager
 
         if (!state.GameLogicData.TryGetData(tile.improvement.type, out var data))
         {
-            AMain.modLogger.LogError("Nice one dumbfuck");
+            Main.modLogger.LogError("Nice one dumbfuck");
             return;
         }
 
-        if (data.HasAbility(AMain.Electric) && tile.improvement.level <= data.maxLevel)
+        if (data.HasAbility(Main.Electric) && tile.improvement.level <= data.maxLevel)
         {
             __result = true;
         }
@@ -85,7 +71,7 @@ public static class LightningManager
 		if (tile == null) return;
         if (tile.improvement == null) return;
 
-        if (state.GameLogicData.TryGetData(tile.improvement.type, out var data) && data.HasAbility(AMain.Collect))
+        if (state.GameLogicData.TryGetData(tile.improvement.type, out var data) && data.HasAbility(Main.Collect))
         {
             __result = true;
         }
@@ -95,7 +81,7 @@ public static class LightningManager
     [HarmonyPatch(typeof(GameLogicData), nameof(GameLogicData.CanBuild))]
     private static void GameLogicData_CanBuild(GameState gameState, TileData tile, PlayerState playerState, ImprovementData improvement, ref bool __result)
 	{
-        if (improvement.type != AMain.Ritual) return;
+        if (improvement.type != Main.Ritual) return;
 
         if (tile.improvement == null)
         {
@@ -105,7 +91,7 @@ public static class LightningManager
 
         if (!gameState.GameLogicData.TryGetData(tile.improvement.type, out var conduitData)) return;
 
-        if (conduitData.HasAbility(AMain.Collect) && tile.improvement.level == conduitData.maxLevel)
+        if (conduitData.HasAbility(Main.Collect) && tile.improvement.level == conduitData.maxLevel)
         {
             __result = true;
             return;
@@ -118,14 +104,14 @@ public static class LightningManager
     [HarmonyPatch(typeof(BuildAction), nameof(BuildAction.ExecuteDefault))]
     private static void BuildAction_AnimaConduintThingie(BuildAction __instance, GameState gameState)
 	{
-        if (__instance.Type == AMain.Ritual)
+        if (__instance.Type == Main.Ritual)
         {
             gameState.ActionStack.Add(new ImprovementLevelDownAction(__instance.PlayerId, __instance.Coordinates, 2));
         }
 
         if (!gameState.GameLogicData.TryGetData(__instance.Type, out var conduitData)) return;
 
-        if (conduitData.HasAbility(AMain.Maxed))
+        if (conduitData.HasAbility(Main.Maxed))
         {
             for (int i = 0; i < conduitData.maxLevel; i++)
             {

@@ -169,7 +169,7 @@ public static class Main
             CommandUtils.AddCommand(gameState, __result, command, includeUnavailable);
         }
 
-        if (tile.unit.HasAbility(LightningUnit) && !tile.unit.attacked && !tile.unit.moved)
+        if (tile.unit.HasAbility(LightningUnit) && ((!tile.unit.attacked && !tile.unit.moved) || tile.unit.HasAbility(UnitAbility.Type.Dash)))
         {
             bool flag = false;
             if (tile.unit.HasAbility(Capacitor))

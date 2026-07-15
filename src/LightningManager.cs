@@ -37,7 +37,7 @@ public static class LightningManager
     [HarmonyPatch(typeof(Building), nameof(Building.UpdateObject), typeof(MapRenderContext), typeof(SkinVisualsTransientData))]
     private static void EffectColor(Building __instance, MapRenderContext ctx, SkinVisualsTransientData transientSkinData)
     {
-        if (__instance.state.HasEffect(AMain.Critical))
+        if (__instance.state.HasEffect(Main.Critical))
         {
             TerrainMaterialHelper.SetSpriteTint(__instance.SpriteRenderer, new UnityEngine.Color(1, 0, 0));
         }

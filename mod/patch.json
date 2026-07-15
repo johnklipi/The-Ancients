@@ -38,7 +38,8 @@
                 "knight": "spark_unit",
                 "archer": "archer_unit",
                 "rider": "rider_unit",
-                "giant": "mjolnir_unit"
+                "giant": "mjolnir_unit",
+                "dagger": "dagger_unit"
             },
             "improvementOverrides":{
                 "market": "animarket_improvement"
@@ -747,22 +748,47 @@
 			"defence": 40,
 			"movement": 1,
 			"range": 1,
-			"attack": 40,
+			"attack": 35,
 			"cost": 8,
 			"weapon": 7,
 			"unitAbilities": [
 				"land",
                 "static",
+                "capacitor_ability",
                 "surprise",
                 "splash",
                 "polib_lazy",
-                "push_ability"
+                "push_ability",
+                "lightning_ability"
 			],
             "hidden": true,
 			"idx": -1,
 
-            "prefab": "swordsman"
-        }
+            "prefab": "swordsman",
+            "maxCharge": 1,
+            "chargeConsumptionAmount": 1
+        },
+
+        "dagger_unit": {
+			"health": 100,
+			"defence": 10,
+			"movement": 1,
+			"range": 1,
+			"attack": 20,
+			"cost": 2,
+			"hidden": true,
+			"unitAbilities": [
+				"dash",
+				"surprise",
+				"independent",
+				"static",
+				"land",
+                "lightning_ability"
+			],
+			"weapon": 13,
+			"idx": -1,
+            "prefab": "dagger"
+		}
     },
     "unitAbility": {
         "excavation_ability": {
@@ -794,6 +820,10 @@
         },
 
         "push_ability": {
+            "idx": -1
+        },
+
+        "lightning_ability": {
             "idx": -1
         }
     },
@@ -955,6 +985,9 @@
         },
         "excavatecommand": {
             "idx": -1
+        },
+        "lightningexplosioncommand": {
+            "idx": -1
         }
     },
     "actionType": {
@@ -977,6 +1010,9 @@
             "idx": -1
         },
         "pushaction": {
+            "idx": -1
+        },
+        "lightningexplosionaction": {
             "idx": -1
         }
     },

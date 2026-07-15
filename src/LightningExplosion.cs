@@ -12,6 +12,13 @@ public class LightningExplosionCommand : PolibCommandBase
     public LightningExplosionCommand() {}
     public override void ExecuteNew(GameState state)
     {
+        UnitState unit = state.Map.GetTile(Coordinates).unit;
+
+        if (unit != null && !unit.HasAbility(Main.Capacitor))
+        {
+            state.ActionStack.Add(new KillUnitAction(PlayerId, Coordinates));
+        }
+
         LightningExplosionAction action = PolibActionManager.MakeIl2CppAction<LightningExplosionAction>();
         action.PlayerId = PlayerId;
         action.Coordinates = Coordinates;
@@ -30,7 +37,7 @@ public class LightningExplosionCommand : PolibCommandBase
     
     public override CommandType GetCommandType()
     {
-        CommandType type = EnumCache<CommandType>.GetType("LightningExplosionCommand");
+        CommandType type = EnumCache<CommandType>.GetType("lightningexplosioncommand");
         return type;
     }
 
@@ -58,7 +65,7 @@ public class LightningExplosionAction : PolibActionBase
 
     public override ActionType GetActionType()
     {
-        return EnumCache<ActionType>.GetType("LightningExplosionAction");
+        return EnumCache<ActionType>.GetType("lightningexplosionaction");
     }
     
     public override void Execute(GameState state)
@@ -77,16 +84,19 @@ public class LightningExplosionAction : PolibActionBase
             if (tile.unit != null && !player.HasPeaceWith(tile.unit.owner) && tile.unit.owner != base.PlayerId)
             {
                 BattleResults battleResults2 = BattleHelpers.GetBattleResults(state, unit, tile.unit);
-                state.ActionStack.Add(new AttackAction(base.PlayerId, Coordinates, tile.coordinates, battleResults2.attackDamage / 2, shouldMoveToTarget: false, AttackAction.AnimationType.Splash, 20));
+                state.ActionStack.Add(new AttackAction(base.PlayerId, Coordinates, tile.coordinates, battleResults2.attackDamage, shouldMoveToTarget: false, AttackAction.AnimationType.Splash, 20));
             }
         }
 
-        ChargeAction action = PolibActionManager.MakeIl2CppAction<ChargeAction>();
-        action.PlayerId = unit.owner;
-        action.Coordinates = unit.coordinates;
-        action.Positive = false;
-        state.ActionStack.Add(action);
-
+        if (unit.HasAbility(Main.Capacitor))
+        {
+            ChargeAction action = PolibActionManager.MakeIl2CppAction<ChargeAction>();
+            action.PlayerId = unit.owner;
+            action.Coordinates = unit.coordinates;
+            action.Positive = false;
+            state.ActionStack.Add(action);
+        }
+        
         unit.MakeExhauseted(state);
     }
 

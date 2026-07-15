@@ -29,6 +29,7 @@ public static class Main
     {
         PolibCommandManager.RegisterCommand<DischargeCommand>("dischargecommand");
         PolibCommandManager.RegisterCommand<ExcavateCommand>("excavatecommand");
+        PolibCommandManager.RegisterCommand<LightningExplosionCommand>("lightningexplosioncommand");
 
         PolibActionManager.RegisterAction<DischargeAction>("dischargeaction");
         PolibActionManager.RegisterAction<ExcavateAction>("excavateaction");
@@ -37,6 +38,7 @@ public static class Main
         PolibActionManager.RegisterAction<LightningStrikeAction>("lightningstrikeaction");
         PolibActionManager.RegisterAction<ApplyConductionAction>("applyconductionaction");
         PolibActionManager.RegisterAction<PushAction>("pushaction");
+        PolibActionManager.RegisterAction<LightningExplosionAction>("lightningexplosionaction");
 
         PolibReactionManager.AssignReaction<DischargeReaction>("dischargeaction");
         PolibReactionManager.AssignReaction<ExcavateReaction>("excavateaction");
@@ -44,6 +46,7 @@ public static class Main
         PolibReactionManager.AssignReaction<ChargeReaction>("chargeaction");
         PolibReactionManager.AssignReaction<LightningStrikeReaction>("lightningstrikeaction");
         PolibReactionManager.AssignReaction<ApplyConductionReaction>("applyconductionaction");
+        PolibReactionManager.AssignReaction<LightningExplosionReaction>("lightningexplosionaction");
 
         if (
             !EnumCache<UnitAbility.Type>.TryGetType("charge_ability", out Charge) 
@@ -54,6 +57,7 @@ public static class Main
             || !EnumCache<UnitAbility.Type>.TryGetType("shock_ability", out Shock) 
             || !EnumCache<UnitAbility.Type>.TryGetType("protect_ability", out Protect) 
             || !EnumCache<UnitAbility.Type>.TryGetType("push_ability", out Push) 
+            || !EnumCache<UnitAbility.Type>.TryGetType("lightning_ability", out LightningUnit) 
 
             || !EnumCache<UnitEffect>.TryGetType("conductive_effect", out Conductive)
             || !EnumCache<UnitEffect>.TryGetType("charge_effect", out Charged)
@@ -131,6 +135,7 @@ public static class Main
     public static UnitAbility.Type Shock;
     public static UnitAbility.Type Protect;
     public static UnitAbility.Type Push;
+    public static UnitAbility.Type LightningUnit;
     public static UnitEffect Charged;
     public static UnitEffect Conductive;
     public static ImprovementAbility.Type Lightning;
@@ -162,6 +167,30 @@ public static class Main
             command.Coordinates = tile.coordinates;
             command.PlayerId = player.Id;
             CommandUtils.AddCommand(gameState, __result, command, includeUnavailable);
+        }
+
+        if (tile.unit.HasAbility(LightningUnit) && !tile.unit.attacked && !tile.unit.moved)
+        {
+            bool flag = false;
+            if (tile.unit.HasAbility(Capacitor))
+            {
+                if (ChargeManager.GetChargeCount(tile.unit) > 0)
+                {
+                    flag = true;
+                }
+            }
+            else
+            {
+                flag = true;
+            }
+
+            if (flag)
+            {
+                LightningExplosionCommand command = PolibCommandManager.MakeIl2CppCommand<LightningExplosionCommand>();
+                command.Coordinates = tile.coordinates;
+                command.PlayerId = player.Id;
+                CommandUtils.AddCommand(gameState, __result, command, includeUnavailable);
+            }
         }
     }
 

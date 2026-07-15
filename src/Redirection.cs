@@ -20,6 +20,9 @@ public static class Redirection
     {
         TileData originTile = gameState.Map.GetTile(origin);
         TileData targetTile = gameState.Map.GetTile(target);
+
+        if (originTile == null || targetTile == null) return true;
+
         UnitState attacker = originTile.unit;
         UnitState defender = targetTile.unit;
 

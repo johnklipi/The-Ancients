@@ -3,6 +3,7 @@ using HarmonyLib;
 using Polytopia.Data;
 using Polibrary.PolyScript;
 using Il2Gen = Il2CppSystem.Collections.Generic;
+using UnityEngine;
 
 
 namespace Ancients;
@@ -32,14 +33,45 @@ public static class PushManager
         gameState.ActionStack.Add(action);
     }
 
+    [HarmonyPrefix]
+    [HarmonyPatch(typeof(MoveAction), nameof(MoveAction.ExecuteDefault))]
+    private static void MoveAction_ExecuteDefault(MoveAction __instance, GameState gameState)
+    {
+        if (!gameState.TryGetUnit(__instance.UnitId, out var unit) || !gameState.TryGetPlayer(__instance.PlayerId, out var playerState) || !gameState.GameLogicData.TryGetData(unit.type, out var data))
+        {
+            return;
+        }
+
+        if (!unit.HasAbility(UnitAbility.Type.Stomp) || !unit.HasAbility(Main.Push)) return;
+
+        TileData origin = gameState.Map.GetTile(__instance.Path[0]);
+
+        foreach (TileData target in gameState.Map.GetTileNeighbors(origin.coordinates))
+        {
+            if (unit == null)
+            {
+                continue;
+            }
+            if (target.unit == null)
+            {
+                continue;
+            }
+            if (target.unit.owner == unit.owner || playerState.HasPeaceWith(target.unit.owner))
+            {
+                continue;
+            }
+
+            PushAction action = PolibActionManager.MakeIl2CppAction<PushAction>();
+            action.PlayerId = __instance.PlayerId;
+            action.Target = target.coordinates;
+            action.Origin = origin.coordinates;
+            gameState.ActionStack.Add(action);
+        }
+    }
+
     public static bool TryPushUnit2(GameState gameState, byte playerId, TileData tile, TileData originalTile)
     {
-        if (originalTile.unit == null)
-        {
-            Main.modLogger.LogError("didn't account for that. tf did you do??");
-            return false;
-        }
-        GridDirection gridDirection = originalTile.unit.direction;
+        GridDirection gridDirection = WorldCoordinates.ToDirection(tile.coordinates - originalTile.coordinates);
         if (tile.unit.HasFollower() && tile.unit.HasLeader())
         {
             GridDirection firstDirection = tile.unit.LeaderDirection(gameState);

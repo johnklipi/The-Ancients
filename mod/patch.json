@@ -666,7 +666,7 @@
                 "static",
                 "capacitor_ability"
             ],
-            "weapon": 5,
+            "weapon": 7,
             "prefab": "rammership",
 
             "maxCharge": 1,
@@ -765,7 +765,33 @@
 
             "prefab": "swordsman",
             "maxCharge": 1,
-            "chargeConsumptionAmount": 1
+            "chargeConsumptionAmount": 1,
+            "embarksTo": "mjolship_unit"
+        },
+
+        "mjolship_unit": {
+            "health": 300,
+			"defence": 40,
+			"movement": 2,
+			"range": 1,
+			"attack": 25,
+			"cost": 8,
+			"weapon": 7,
+			"unitAbilities": [
+                "stiff",
+                "surprise",
+				"stomp",
+				"swim",
+				"carry",
+				"water",
+				"static",
+                "polib_lazy",
+                "push_ability"
+			],
+            "hidden": true,
+			"idx": -1,
+
+            "prefab": "juggernaut"
         },
 
         "dagger_unit": {

@@ -603,7 +603,7 @@
             "defence": 0,
             "movement": 1,
             "range": 2,
-            "attack": 20,
+            "attack": 30,
             "cost": 8,
             "unitAbilities": [
                 "stiff",
@@ -657,7 +657,7 @@
             "defence": 10,
             "movement": 2,
             "range": 1,
-            "attack": 30,
+            "attack": 25,
             "cost": 3,
             "unitAbilities": [
                 "dash",

@@ -188,7 +188,7 @@ public class DischargeReaction : PolibReactionBase
             }
             else if (action.Level == 1)
             {
-                Polibrary.PolibUtils.ShakeCamera(0.1f, 0.5f);
+                VFXManager.ShakeCamera(0.1f, 0.5f);
 
                 instance.SpawnAreaDamage();
                 
@@ -202,7 +202,7 @@ public class DischargeReaction : PolibReactionBase
             }
             else if (action.Level == 2)
             {
-                Polibrary.PolibUtils.ShakeCamera(0.1f, 1f);
+                VFXManager.ShakeCamera(0.1f, 1f);
 
                 VFXManager.EnsureCustomPuffRegistered("DischargePuffLarge", "Puff");
                 instance.DoPuff("DischargePuffLarge", instance.transform, instance.VisualCenterObject.localPosition);

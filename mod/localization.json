@@ -29,6 +29,15 @@
     "unit_names_spark__unit": {
         "English": "Jumpspark"
     },
+    "unit_names_mjolnir__unit": {
+        "English": "Mjolnir"
+    },
+    "unit_names_mjolship__unit": {
+        "English": "Mjolship"
+    },
+    "unit_names_dagger__unit": {
+        "English": "Lightning Dagger"
+    },
 
     "unit_abilities_consumed": {
         "English": "CONSUMED"
@@ -72,6 +81,13 @@
     "tooltip_ability_shock__ability": {
         "English": "This unit can shock enemies, making them conductive. Conductive units shock nearby units, then explode after death."
     },
+    "unit_abilities_push__ability": {
+        "English": "PUSH"
+    },
+    "tooltip_ability_push__ability": {
+        "English": "This unit can push enemies away."
+    },
+
 
     "actionbox_unit_charge__effect": {
         "English": "Charge"

@@ -905,6 +905,9 @@
 			"terrainRequirements": [
                 {
 					"terrain": "field"
+				},
+                {
+					"terrain": "forest"
 				}
 			],
             "improvementAbilities": [

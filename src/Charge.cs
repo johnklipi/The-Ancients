@@ -1,5 +1,7 @@
-using Polibrary;
-using AMain = Ancients.Main;
+using BepInEx.Logging;
+using HarmonyLib;
+using Polytopia.Data;
+using Polibrary.PolyScript;
 using Ancients;
 
 public class ChargeAction : PolibActionBase
@@ -36,30 +38,28 @@ public class ChargeAction : PolibActionBase
         {
             if (ChargeManager.GetChargeCount(tile.unit) < ChargeManager.GetMaxCharge(tile.unit.type))
             {
-                tile.unit.effects.Add(AMain.Charged);
+                tile.unit.effects.Add(Main.Charged);
             }
         }
         else
         {
             for (int i = 0; i < ChargeManager.GetChargeConsumptionAmount(tile.unit.type); i++)
             {
-                tile.unit.RemoveEffect(AMain.Charged);
+                tile.unit.RemoveEffect(Main.Charged);
             }
         }
     }
 
     public override void Serialize(Il2CppSystem.IO.BinaryWriter writer, int version)
     {
-        // base.Serialize(writer, version);
-        writer.Write(PlayerId);  // The safe way.
+        writer.Write(PlayerId); //this line is important btw
         writer.Write(Positive);
         Coordinates.Serialize(writer, version);
     }
 
     public override void Deserialize(Il2CppSystem.IO.BinaryReader reader, int version)
     {
-        // base.Deserialize(reader, version);
-        PlayerId = reader.ReadByte(); // The safe way.
+        PlayerId = reader.ReadByte(); //leave this line in
         Positive = reader.ReadBoolean();
         Coordinates.Deserialize(reader, version);
     }
@@ -134,4 +134,3 @@ public class ChargeReaction : PolibReactionBase
         }
     }
 }
-

@@ -1,6 +1,9 @@
+using BepInEx.Logging;
+using HarmonyLib;
 using Polytopia.Data;
-using Polibrary;
-using AMain = Ancients.Main;
+using Polibrary.PolyScript;
+using Il2Gen = Il2CppSystem.Collections.Generic;
+using Ancients;
 
 public class ExcavateCommand : PolibCommandBase
 {
@@ -65,6 +68,7 @@ public class ExcavateCommand : PolibCommandBase
 public class ExcavateAction : PolibActionBase
 {
     public WorldCoordinates Coordinates;
+    public WorldCoordinates UnitHome;
     public ExcavateAction(System.IntPtr ptr) : base(ptr) {}
     public ExcavateAction() {}
 
@@ -102,30 +106,32 @@ public class ExcavateAction : PolibActionBase
                 founder = base.PlayerId
             };
         }
+        UnitHome = tile.unit.home;
         ActionUtils.KillUnit(state, tile);
     }
 
     public override void Serialize(Il2CppSystem.IO.BinaryWriter writer, int version)
     {
-        // base.Serialize(writer, version);
-        writer.Write(PlayerId);  // The safe way.
+        writer.Write(PlayerId); //this line is important btw
         Coordinates.Serialize(writer, version);
+        UnitHome.Serialize(writer, version);
     }
 
     public override void Deserialize(Il2CppSystem.IO.BinaryReader reader, int version)
     {
-        // base.Deserialize(reader, version);
-        PlayerId = reader.ReadByte(); // The safe way.
+        PlayerId = reader.ReadByte(); //leave this line in
         Coordinates.Deserialize(reader, version);
+        UnitHome.Deserialize(reader, version);
     }
 
     public override string ToString()
     {
-        return string.Format("{0} (PlayerId: {1}, Coordinates: {2})", new object[]
+        return string.Format("{0} (PlayerId: {1}, Coordinates: {2}, UnitHome {3})", new object[]
         {
             base.GetType(),
             base.PlayerId,
-            this.Coordinates
+            this.Coordinates,
+            this.UnitHome
         });
     }
 }
@@ -142,7 +148,7 @@ public class ExcavateReaction : PolibReactionBase
             if (action != null)
             this.action = action;
             else
-            AMain.modLogger.LogInfo("shits fucked");
+            Main.modLogger.LogInfo("shits fucked");
         } 
     }
     public ExcavateReaction(System.IntPtr ptr) : base(ptr) {}
@@ -170,13 +176,18 @@ public class ExcavateReaction : PolibReactionBase
             instance.Render();
             instance.SpawnShine();
             instance.Sway();
+            if (GameManager.GameState.Map.GetTile(action.UnitHome) != null)
+            {
+                Tile homeInstance = GameManager.GameState.Map.GetTile(action.UnitHome).GetInstance();
+                if (homeInstance != null)
+                {
+                    homeInstance.Render();
+                }
+            }
             AudioManager.PlaySFXAtTile(SFXTypes.Capture, tile.coordinates);
             GameManager.DelayCall(200, onComplete);
+            return;
         }
-        else
-        {
-            onComplete.Invoke();
-        }
+        onComplete.Invoke();
     }
 }
-

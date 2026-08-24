@@ -1,5 +1,5 @@
-using Polibrary;
-using AMain = Ancients.Main;
+using Polibrary.PolyScript;
+using Ancients;
 
 public class ApplyConductionAction : PolibActionBase
 {
@@ -32,22 +32,20 @@ public class ApplyConductionAction : PolibActionBase
 
         if (tile != null && tile.unit != null)
         {
-            tile.unit.AddEffect(AMain.Conductive);
+            tile.unit.AddEffect(Main.Conductive);
         }
     }
 
     public override void Serialize(Il2CppSystem.IO.BinaryWriter writer, int version)
     {
-        // base.Serialize(writer, version);
-        writer.Write(PlayerId);  // The safe way.
+        writer.Write(PlayerId); //this line is important btw
         Origin.Serialize(writer, version);
         Coordinates.Serialize(writer, version);
     }
 
     public override void Deserialize(Il2CppSystem.IO.BinaryReader reader, int version)
     {
-        // base.Deserialize(reader, version);
-        PlayerId = reader.ReadByte(); // The safe way.
+        PlayerId = reader.ReadByte(); //leave this line in
         Origin.Deserialize(reader, version);
         Coordinates.Deserialize(reader, version);
     }
@@ -76,7 +74,7 @@ public class ApplyConductionReaction : PolibReactionBase
             if (ApplyConductionAction != null)
             this.action = ApplyConductionAction;
             else
-            AMain.modLogger.LogInfo("shits fucked");
+            Main.modLogger.LogInfo("shits fucked");
         } 
     }
     public ApplyConductionReaction(IntPtr ptr) : base(ptr) {}
@@ -103,11 +101,12 @@ public class ApplyConductionReaction : PolibReactionBase
         if (instance != null && !instance.IsHidden)
         {
             instance.Render();
-            instance.Sway();
-            GameManager.DelayCall(200, onComplete);
+            VFXManager.EnsureCustomPuffRegistered("ChargePuff", "Puff");
+            instance.DoPuff("ChargePuff", instance.transform, instance.VisualCenterObject.localPosition);
+            GameManager.DelayCall(50, onComplete);
+            return;
         }
 
         onComplete.Invoke();
     }
 }
-

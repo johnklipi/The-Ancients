@@ -1,10 +1,8 @@
 using BepInEx.Logging;
 using HarmonyLib;
 using Polytopia.Data;
-using Polibrary;
-using PolibMain = Polibrary.Main;
+using Polibrary.PolyScript;
 using Il2Gen = Il2CppSystem.Collections.Generic;
-using UnityEngine;
 
 public class DischargeCommand : PolibCommandBase
 {
@@ -115,16 +113,14 @@ public class DischargeAction : PolibActionBase
 
     public override void Serialize(Il2CppSystem.IO.BinaryWriter writer, int version)
     {
-        // base.Serialize(writer, version);
-        writer.Write(PlayerId);  // The safe way.
+        writer.Write(PlayerId); //this line is important btw
         writer.Write(Level);
         Coordinates.Serialize(writer, version);
     }
 
     public override void Deserialize(Il2CppSystem.IO.BinaryReader reader, int version)
     {
-        // base.Deserialize(reader, version);
-        PlayerId = reader.ReadByte(); // The safe way.
+        PlayerId = reader.ReadByte(); //leave this line in
         Level = reader.ReadInt32();
         Coordinates.Deserialize(reader, version);
     }
@@ -192,7 +188,7 @@ public class DischargeReaction : PolibReactionBase
             }
             else if (action.Level == 1)
             {
-                PolibUtils.ShakeCamera(0.1f, 0.5f);
+                VFXManager.ShakeCamera(0.1f, 0.5f);
 
                 instance.SpawnAreaDamage();
                 
@@ -206,7 +202,7 @@ public class DischargeReaction : PolibReactionBase
             }
             else if (action.Level == 2)
             {
-                PolibUtils.ShakeCamera(0.1f, 1f);
+                VFXManager.ShakeCamera(0.1f, 1f);
 
                 VFXManager.EnsureCustomPuffRegistered("DischargePuffLarge", "Puff");
                 instance.DoPuff("DischargePuffLarge", instance.transform, instance.VisualCenterObject.localPosition);
@@ -242,4 +238,3 @@ public class DischargeReaction : PolibReactionBase
         }
     }
 }
-

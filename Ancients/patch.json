@@ -2,27 +2,26 @@
     "tribeData": {
         "ancients": {
             "idx": -1,
-            "startingStars": 7,
+            "startingStars": 5,
             "color": 48127,
-            "language": "pol,topan,poly,topia,toria,topius,pius,top,polan,toran,ol,tes,la,sa,tor,cite,ty,cap,kap,sua,ius,xin,ouy,urk,ki,dor,wast,zeb,tza,on,aqu,cy",
+            "language": "pol,topan,poly,to,pia,ria,pius,polan,ran,ol,tes,la,sa,tor,ci,te,ty,cap,kap,sua,ius,xin,ouy,urk,ki,dor,wast,tza,on,aqu,cy",
             "startingUnit": "archeologist_unit",
             "category": 2,
             "terrainModifier":{
                 "mountain": 0.5,
-                "forest": 0.1
+                "forest": 0.2
             },
             "resourceModifier":{
                 "metal": 1.5,
-                "fruit": 1,
-                "game": 1.5,
-                "crop": 0.2
+                "fruit": 0.8,
+                "game": 0,
+                "crop": 0.6
             },
             "startingTech":[
                 "basic",
-                "hunting"
+                "animation_tech"
             ],
             "startingResource":[
-                "crop",
                 "fruit",
                 "fruit"
             ],
@@ -30,7 +29,7 @@
 
             ],
             "techOverrides":{
-                
+                "hunting": "animation_tech"
             },
             "unitOverrides":{
                 "warrior": "warrior_unit",
@@ -38,15 +37,12 @@
                 "catapult": "railcannon_unit",
                 "knight": "spark_unit",
                 "archer": "archer_unit",
-                "rider": "rider_unit"
+                "rider": "rider_unit",
+                "giant": "mjolnir_unit",
+                "dagger": "dagger_unit"
             },
             "improvementOverrides":{
-                "lumberhut": "electrode_improvement",
-                "hunting": "lightningrod_improvement",
-                "sawmill": "battery_improvement",
-                "market": "semiconductor_improvement",
-
-                "clearforest": "hunting"
+                "market": "animarket_improvement"
             },
             "preview": [
                 {
@@ -445,6 +441,11 @@
         }
     },
     "techData": {
+        "basic": {
+            "improvementUnlocks": [
+                "+animacollect_improvement"
+            ]
+        },
         "tesla_secrettech": {
             "unitUnlocks": [
                 "teslatower_unit"
@@ -466,20 +467,61 @@
 			"cost": 0,
 			"idx": -1
         },
-        "sapper_secrettech": {
-            "unitUnlocks": [
-                "sapper_unit"
-            ],
-			"cost": 0,
-			"idx": -1
-        },
         "sentry_secrettech": {
             "unitUnlocks": [
                 "sentry_unit"
             ],
 			"cost": 0,
 			"idx": -1
-        }
+        },
+        "animation_tech": {
+            "improvementUnlocks": [
+                "animaconduit_improvement"
+            ],
+            "techUnlocks": [
+                "archery_tech",
+                "lightning_tech"
+            ],
+			"cost": 1,
+			"idx": -1
+        },
+        "lightning_tech": {
+            "improvementUnlocks": [
+                "lightningrod_improvement"
+            ],
+            "techUnlocks": [
+                "lunacy_tech"
+            ],
+			"cost": 2,
+			"idx": -1
+        },
+        "lunacy_tech": {
+            "improvementUnlocks": [
+                "animatotem_improvement"
+            ],
+            "unitUnlocks": [
+                "railcannon_unit"
+            ],
+			"cost": 3,
+			"idx": -1
+        },
+        "archery_tech": {
+			"techUnlocks": [
+				"spiritualism"
+			],
+			"unitUnlocks": [
+				"archer"
+			],
+            "improvementUnlocks":[
+                "clearforest"
+            ],
+			"defenceBonusUnlocks": {
+				"forest": 15
+			},
+			"cost": 2,
+			"idx": -1
+		}
+
     },
     "unitData": {
         "warrior_unit": {
@@ -561,7 +603,7 @@
             "defence": 0,
             "movement": 1,
             "range": 2,
-            "attack": 20,
+            "attack": 30,
             "cost": 8,
             "unitAbilities": [
                 "stiff",
@@ -571,8 +613,8 @@
             "weapon": 5,
             "prefab": "catapult",
 
-            "maxCharge": 3,
-            "chargeConsumptionAmount": 3,
+            "maxCharge": 2,
+            "chargeConsumptionAmount": 2,
             "chargeConsumptionEvent": [
                 "attack"
             ],
@@ -588,7 +630,7 @@
             "defence": 30,
             "movement": 1,
             "range": 0,
-            "attack": 10,
+            "attack": 15,
             "cost": 8,
             "unitAbilities": [
                 "stiff",
@@ -613,10 +655,10 @@
             "idx": -1,
             "health": 100,
             "defence": 10,
-            "movement": 1,
+            "movement": 2,
             "range": 1,
             "attack": 25,
-            "cost": 5,
+            "cost": 3,
             "unitAbilities": [
                 "dash",
                 "escape",
@@ -624,13 +666,13 @@
                 "static",
                 "capacitor_ability"
             ],
-            "weapon": 5,
+            "weapon": 7,
             "prefab": "rammership",
 
-            "maxCharge": 2,
+            "maxCharge": 1,
             "chargeConsumptionAmount": 1,
             "chargeConsumptionEvent": [
-                "move"
+                "attack"
             ],
             "chargeBuff": [
                 "movement"
@@ -649,16 +691,14 @@
                 "land",
                 "static",
                 "stiff",
-                "capacitor_ability"
+                "capacitor_ability",
+                "protect_ability"
             ],
             "weapon": 1,
             "prefab": "defender",
 
-            "maxCharge": 3,
-            "chargeConsumptionAmount": 1,
-            "chargeBuff": [
-                "defence"
-            ]
+            "maxCharge": 2,
+            "chargeConsumptionAmount": 1
         },
 
         "railcannon_unit": {
@@ -685,7 +725,7 @@
 			"defence": 10,
 			"movement": 2,
 			"range": 1,
-			"attack": 0,
+			"attack": 1,
 			"cost": 8,
 			"weapon": 7,
 			"unitAbilities": [
@@ -703,26 +743,77 @@
             "prefab": "spark"
         },
 
-        "sapper_unit": {
-            "idx": -1,
-            "health": 100,
-            "defence": 10,
-            "movement": 3,
-            "range": 1,
-            "attack": 1,
-            "cost": 5,
-            "unitAbilities": [
-                "land",
+        "mjolnir_unit": {
+            "health": 300,
+			"defence": 40,
+			"movement": 1,
+			"range": 1,
+			"attack": 35,
+			"cost": 8,
+			"weapon": 7,
+			"unitAbilities": [
+				"land",
                 "static",
-                "dash",
-                "capacitor_ability"
-            ],
-            "weapon": 1,
-            "prefab": "rider",
+                "capacitor_ability",
+                "surprise",
+                "polib_lazy",
+                "push_ability",
+                "lightning_ability"
+			],
+            "hidden": true,
+			"idx": -1,
 
+            "prefab": "swordsman",
             "maxCharge": 1,
-            "chargeConsumptionAmount": 1
-        }
+            "chargeConsumptionAmount": 1,
+            "embarksTo": "mjolship_unit"
+        },
+
+        "mjolship_unit": {
+            "health": 300,
+			"defence": 40,
+			"movement": 2,
+			"range": 1,
+			"attack": 25,
+			"cost": 8,
+			"weapon": 7,
+			"unitAbilities": [
+                "stiff",
+                "surprise",
+				"stomp",
+				"swim",
+				"carry",
+				"water",
+				"static",
+                "polib_lazy",
+                "push_ability"
+			],
+            "hidden": true,
+			"idx": -1,
+
+            "prefab": "juggernaut"
+        },
+
+        "dagger_unit": {
+			"health": 100,
+			"defence": 10,
+			"movement": 1,
+			"range": 1,
+			"attack": 20,
+			"cost": 2,
+			"hidden": true,
+			"unitAbilities": [
+				"dash",
+				"surprise",
+				"independent",
+				"static",
+				"land",
+                "lightning_ability"
+			],
+			"weapon": 13,
+			"idx": -1,
+            "prefab": "dagger"
+		}
     },
     "unitAbility": {
         "excavation_ability": {
@@ -747,6 +838,18 @@
 
         "shock_ability": {
             "idx": -1
+        },
+
+        "protect_ability": {
+            "idx": -1
+        },
+
+        "push_ability": {
+            "idx": -1
+        },
+
+        "lightning_ability": {
+            "idx": -1
         }
     },
     "unitEffectData": {
@@ -765,6 +868,12 @@
         },
         "electric_improvementability": {
             "idx": -1
+        },
+        "collect_improvementability": {
+            "idx": -1
+        },
+        "maxed_improvementability": {
+            "idx": -1
         }
     },
     "improvementData": {
@@ -772,23 +881,6 @@
             "idx": -1
         },
         "lightningrod_improvement": {
-			"cost": 5,
-			"terrainRequirements": [
-				{
-					"terrain": "forest"
-				},
-                {
-					"terrain": "field"
-				}
-			],
-            "improvementAbilities": [
-                "limited",
-                "lightning_improvementability"
-            ],
-			"maxLevel": 0,
-			"idx": -1
-		},
-        "electrode_improvement": {
 			"cost": 3,
 			"terrainRequirements": [
 				{
@@ -796,22 +888,49 @@
 				},
                 {
 					"terrain": "field"
+				},
+                {
+                    "terrain": "mountain"
+                }
+			],
+            "improvementAbilities": [
+                "lightning_improvementability",
+                "limited"
+            ],
+			"maxLevel": 0,
+			"idx": -1
+		},
+        "animaconduit_improvement": {
+			"cost": 4,
+			"terrainRequirements": [
+                {
+					"terrain": "field"
+				},
+                {
+					"terrain": "forest"
 				}
 			],
             "improvementAbilities": [
-                "electric_improvementability"
+                "electric_improvementability",
+                "collect_improvementability"
             ],
-            "adjacencyRequirements": [
-				{
-					"improvement": "lightningrod_improvement"
-				}
-			],
-			"maxLevel": 0,
-			"idx": -1,
-
-            "lightningStars": 1
+            "rewards": [
+                {"population": 1}
+            ],
+			"maxLevel": 2,
+			"idx": -1
 		},
-        "battery_improvement": {
+        "animacollect_improvement": {
+            "idx": -1,
+            "cost": 2,
+            "improvementAbilities": [
+                "discrete"
+            ],
+            "rewards": [
+                {"population": 1}
+            ]
+        },
+        "animatotem_improvement": {
 			"cost": 5,
 			"terrainRequirements": [
 				{
@@ -819,24 +938,33 @@
 				},
                 {
 					"terrain": "field"
-				}
+				},
+                {
+                    "terrain": "mountain"
+                }
 			],
-			"maxLevel": 0,
+			"maxLevel": 8,
             "improvementAbilities": [
                 "limited",
-                "electric_improvementability"
+                "simple"
             ],
-            "adjacencyRequirements": [
+            "adjacencyImprovements": [
 				{
-					"improvement": "lightningrod_improvement"
+					"improvement": "animaconduit_improvement"
+				}
+			],
+			"adjacencyRequirements": [
+				{
+					"improvement": "animaconduit_improvement"
 				}
 			],
 			"idx": -1,
-
-            "lightningPop": 2
+            "growthRewards": [
+                {"population": 1}
+            ]
 		},
 
-        "semiconductor_improvement": {
+        "animarket_improvement": {
             "idx": -1,
 			"maxLevel": 8,
 			"cost": 5,
@@ -848,17 +976,16 @@
 			],
 			"adjacencyImprovements": [
 				{
-					"improvement": "electrode_improvement"
+					"improvement": "animatotem_improvement"
 				}
 			],
 			"adjacencyRequirements": [
 				{
-					"improvement": "electrode_improvement"
+					"improvement": "animatotem_improvement"
 				}
 			],
 			"improvementAbilities": [
-				"limited",
-				"simple"
+				"limited"
 			]
         }
     },
@@ -876,10 +1003,6 @@
             "idx": -1,
             "level": 0
         },
-        "logistics_secretreward": {
-            "idx": -1,
-            "level": 0
-        },
         "redirection_secretreward": {
             "idx": -1,
             "level": 0
@@ -891,6 +1014,9 @@
             "idx": -1
         },
         "excavatecommand": {
+            "idx": -1
+        },
+        "lightningexplosioncommand": {
             "idx": -1
         }
     },
@@ -912,20 +1038,17 @@
         },
         "applyconductionaction": {
             "idx": -1
+        },
+        "pushaction": {
+            "idx": -1
+        },
+        "lightningexplosionaction": {
+            "idx": -1
         }
     },
     "sfx": {
         "lightning": {
             "idx": -1
         }
-    },
-    "improvementEffect": {
-        "critical": {
-            "idx": -1
-        }
-    },
-
-    "pActions": {
-
     }
 }

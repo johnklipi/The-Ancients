@@ -26,11 +26,17 @@
     "unit_names_sentry__unit": {
         "English": "Sentry"
     },
-    "unit_names_sapper__unit": {
-        "English": "Sapper"
-    },
     "unit_names_spark__unit": {
         "English": "Jumpspark"
+    },
+    "unit_names_mjolnir__unit": {
+        "English": "Mjolnir"
+    },
+    "unit_names_mjolship__unit": {
+        "English": "Mjolship"
+    },
+    "unit_names_dagger__unit": {
+        "English": "Lightning Dagger"
     },
 
     "unit_abilities_consumed": {
@@ -73,8 +79,15 @@
         "English": "JUMPSTART"
     },
     "tooltip_ability_shock__ability": {
-        "English": "This unit can shock enemies, making them conductive. Conductive units shock units and explode after death."
+        "English": "This unit can shock enemies, making them conductive. Conductive units shock nearby units, then explode after death."
     },
+    "unit_abilities_push__ability": {
+        "English": "PUSH"
+    },
+    "tooltip_ability_push__ability": {
+        "English": "This unit can push enemies away."
+    },
+
 
     "actionbox_unit_charge__effect": {
         "English": "Charge"
@@ -86,17 +99,30 @@
     "building_names_lightningrod__improvement": {
         "English": "Lightning Rod"
     },
-    "building_names_electrode__improvement": {
-        "English": "Electrode"
+    "building_names_animaconduit__improvement": {
+        "English": "Ænima Conduit"
     },
-    "building_names_discharge__improvement": {
-        "English": "Discharge"
+    "building_names_animacollect__improvement": {
+        "English": "Ritual"
     },
-    "building_names_battery__improvement": {
-        "English": "Battery"
+    "building_names_animatotem__improvement": {
+        "English": "Ænima Totem"
     },
-    "building_names_semiconductor__improvement": {
-        "English": "Semiconductor"
+    "building_names_animarket__improvement": {
+        "English": "Ænimarket"
+    },
+
+    "building_ability_lightning__improvementability": {
+        "English": "{0} gets struck by lightning on the beginning of every turn. Lightning either charges chargeable units standing on {0}, or powers adjacent infrastructure."
+    },
+    "building_ability_electric__improvementability": {
+        "English": "{0} uses power from adjacent lightning to gain 1 level."
+    },
+    "building_ability_collect__improvementability": {
+        "English": "You can collect 1 population from {0} once at max level."
+    },
+    "building_ability_maxed__improvementability": {
+        "English": "When built, {0} gets leveled up to its maximum level."
     },
 
     "action_info_excavatecommand": {
@@ -125,11 +151,20 @@
     "technology_names_drone__secrettech": {
         "English": "Aviation"
     },
-    "technology_names_sapper__secrettech": {
-        "English": "Charge Logistics"
-    },
     "technology_names_sentry__secrettech": {
         "English": "Redirection"
+    },
+    "technology_names_lightning__tech": {
+        "English": "Ḻightning"
+    },
+    "technology_names_animation__tech": {
+        "English": "Ænimation"
+    },
+    "technology_names_lunacy__tech": {
+        "English": "Ḻunacy"
+    },
+    "technology_names_archery__tech": {
+        "English": "Archery"
     },
 
     "wcontroller_reward_highvoltage__secretreward": {
@@ -150,5 +185,11 @@
 
     "tribes_ancients": {
         "English": "Ancients"
+    },
+    "tribes_ancients_info": {
+        "English": "Thought to be long defeated, the Ancients rise again! These descendants of the old Polytopian Empire will do anything to restore their rule."
+    },
+    "tribes_info2__ancients": {
+        "English": "The {0} have the ability to use forbidden lunar-lightning magic to create lifeforce out of thin air, power ancient technology, and electrocute anyone standing in their way of rebuilding their empire!"
     }
 }

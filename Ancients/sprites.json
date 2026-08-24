@@ -83,17 +83,31 @@
     },
     "weapon_club_railcannon_unit__": {
         "pixelsPerUnit": 1500,
-        "pivot": [0.20, 0.65]
+        "pivot": [0.2, 0.65]
     },
     "weapon_club_railcannon_unit_outline__": {
         "pixelsPerUnit": 1500,
-        "pivot": [0.20, 0.65]
+        "pivot": [0.2, 0.65]
+    },
+    "weapon_club_archeologist_unit__": {
+        "pixelsPerUnit": 1500,
+        "pivot": [0.65, 0.3]
+    },
+    "weapon_club_archeologist_unit_outline__": {
+        "pixelsPerUnit": 1500,
+        "pivot": [0.65, 0.3]
     },
 
     "lightningrod_improvement__": {
         "pivot": [0.5, 0.15]
     },
-    "electrode_improvement__": {
-        "pivot": [0.5, 0.4]
+    "animaconduit_improvement__0": {
+        "pivot": [0.5, 0.35]
+    },
+    "animaconduit_improvement__1": {
+        "pivot": [0.5, 0.35]
+    },
+    "animaconduit_improvement__2": {
+        "pivot": [0.5, 0.35]
     }
 }

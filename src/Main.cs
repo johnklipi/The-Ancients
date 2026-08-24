@@ -33,7 +33,6 @@ public static class Main
 
         PolibActionManager.RegisterAction<DischargeAction>("dischargeaction");
         PolibActionManager.RegisterAction<ExcavateAction>("excavateaction");
-        PolibActionManager.RegisterAction<AncientsExamineAction>("ancientsexamineaction");
         PolibActionManager.RegisterAction<ChargeAction>("chargeaction");
         PolibActionManager.RegisterAction<LightningStrikeAction>("lightningstrikeaction");
         PolibActionManager.RegisterAction<ApplyConductionAction>("applyconductionaction");
@@ -42,7 +41,6 @@ public static class Main
 
         PolibReactionManager.AssignReaction<DischargeReaction>("dischargeaction");
         PolibReactionManager.AssignReaction<ExcavateReaction>("excavateaction");
-        PolibReactionManager.AssignReaction<AncientsExamineReaction>("ancientsexamineaction");
         PolibReactionManager.AssignReaction<ChargeReaction>("chargeaction");
         PolibReactionManager.AssignReaction<LightningStrikeReaction>("lightningstrikeaction");
         PolibReactionManager.AssignReaction<ApplyConductionReaction>("applyconductionaction");
@@ -67,11 +65,6 @@ public static class Main
             || !EnumCache<CityReward>.TryGetType("chargestorage_secretreward", out var accReward) 
             || !EnumCache<CityReward>.TryGetType("redirection_secretreward", out var sentryReward) 
 
-            || !EnumCache<TechData.Type>.TryGetType("tesla_secrettech", out var teslaTech) 
-            || !EnumCache<TechData.Type>.TryGetType("accumulator_secrettech", out var accTech) 
-            || !EnumCache<TechData.Type>.TryGetType("drone_secrettech", out var droneTech)
-            || !EnumCache<TechData.Type>.TryGetType("sentry_secrettech", out var sentryTech)
-
             || !EnumCache<ImprovementAbility.Type>.TryGetType("lightning_improvementability", out Lightning)
             || !EnumCache<ImprovementAbility.Type>.TryGetType("electric_improvementability", out Electric)
             || !EnumCache<ImprovementAbility.Type>.TryGetType("collect_improvementability", out Collect)
@@ -86,25 +79,12 @@ public static class Main
 			return;
 		}
 
-        TeslaTech = teslaTech;
-        DroneTech = droneTech;
-        AccumulatorTech = accTech;
-        SentryTech = sentryTech;
-
         SecretRewards.AddRange(new CityReward[]
         {
             teslaReward,
             droneReward,
             accReward,
             sentryReward
-        });
-
-        Techs.AddRange(new TechData.Type[]
-        {
-            teslaTech,
-            droneTech,
-            accTech,
-            sentryTech
         });
         
         PolibUtils.ParsePerEach<UnitData.Type, int>(rootObject, "unitData", "maxCharge", MaxCharge);
@@ -122,11 +102,6 @@ public static class Main
     public static Dictionary<ImprovementData.Type, int> LightningStars = new();
     public static Dictionary<ImprovementData.Type, int> LightningPop = new();
     public static List<CityReward> SecretRewards = new();
-    public static List<TechData.Type> Techs = new();
-    public static TechData.Type TeslaTech;
-    public static TechData.Type DroneTech;
-    public static TechData.Type AccumulatorTech;
-    public static TechData.Type SentryTech;
     public static TribeType Ancients;
     public static UnitAbility.Type Discharge;
     public static UnitAbility.Type Charge;

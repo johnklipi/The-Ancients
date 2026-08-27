@@ -1,11 +1,10 @@
 using BepInEx.Logging;
 using HarmonyLib;
-using Polytopia.Data;
 using Polibrary.PolyScript;
-using Il2Gen = Il2CppSystem.Collections.Generic;
+using Ancients.Action;
 
 
-namespace Ancients;
+namespace Ancients.Manager;
 
 public static class RedirectionManager
 {

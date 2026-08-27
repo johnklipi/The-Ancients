@@ -1,7 +1,7 @@
 using Polibrary.PolyScript;
 using Il2Gen = Il2CppSystem.Collections.Generic;
 
-namespace Ancients;
+namespace Ancients.Action;
 public class DischargeAction : PolibActionBase
 {
     public int Level;

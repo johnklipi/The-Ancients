@@ -5,6 +5,10 @@ using Polibrary.PolyScript;
 using Il2Gen = Il2CppSystem.Collections.Generic;
 using PolytopiaBackendBase.Common;
 using Polibrary;
+using Ancients.Action;
+using Ancients.Command;
+using Ancients.Reaction;
+using Ancients.Manager;
 
 
 namespace Ancients;

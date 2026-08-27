@@ -1,9 +1,9 @@
-
 using Polytopia.Data;
 using Polibrary.PolyScript;
 using Il2Gen = Il2CppSystem.Collections.Generic;
+using Ancients.Manager;
 
-namespace Ancients;
+namespace Ancients.Action;
 public class LightningStrikeAction : PolibActionBase
 {
     public WorldCoordinates Coordinates;

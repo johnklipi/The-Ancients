@@ -1,6 +1,7 @@
+using Ancients.Manager;
 using Polibrary.PolyScript;
 
-namespace Ancients;
+namespace Ancients.Action;
 public class ChargeAction : PolibActionBase
 {
     public bool Positive;

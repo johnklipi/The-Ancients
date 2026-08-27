@@ -1,8 +1,7 @@
 using Polytopia.Data;
 using Polibrary.PolyScript;
 
-namespace Ancients;
-
+namespace Ancients.Action;
 public class ExcavateActionObsolete : PolibActionBase
 {
     public WorldCoordinates Coordinates;

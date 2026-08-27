@@ -1,6 +1,7 @@
+using Ancients.Action;
 using Polibrary.PolyScript;
 
-namespace Ancients;
+namespace Ancients.Reaction;
 public class ChargeReaction : PolibReactionBase
 {
     protected ChargeAction action;

@@ -1,6 +1,7 @@
+using Ancients.Action;
 using Polibrary.PolyScript;
 
-namespace Ancients;
+namespace Ancients.Command;
 public class ExcavateCommandObsolete : PolibCommandBase
 {
     public WorldCoordinates Coordinates;

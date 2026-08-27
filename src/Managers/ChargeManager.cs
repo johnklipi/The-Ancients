@@ -3,9 +3,10 @@ using HarmonyLib;
 using Polytopia.Data;
 using Il2Gen = Il2CppSystem.Collections.Generic;
 using Polibrary.PolyScript;
+using Ancients.Action;
 
 
-namespace Ancients;
+namespace Ancients.Manager;
 
 public static class ChargeManager
 {

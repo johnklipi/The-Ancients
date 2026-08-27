@@ -1,10 +1,7 @@
-using BepInEx.Logging;
-using HarmonyLib;
-using Polytopia.Data;
+using Ancients.Action;
 using Polibrary.PolyScript;
-using Il2Gen = Il2CppSystem.Collections.Generic;
-using Ancients;
 
+namespace Ancients.Reaction;
 public class ExcavateReactionObsolete : PolibReactionBase
 {
     protected ExcavateActionObsolete action;

@@ -1,8 +1,8 @@
+using Ancients.Action;
 using Polibrary.PolyScript;
 using Il2Gen = Il2CppSystem.Collections.Generic;
 
-namespace Ancients;
-
+namespace Ancients.Reaction;
 public class LightningExplosionReaction : PolibReactionBase
 {
     protected LightningExplosionAction action;

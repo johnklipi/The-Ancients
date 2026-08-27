@@ -1,6 +1,6 @@
 using Polibrary.PolyScript;
-namespace Ancients;
 
+namespace Ancients.Action;
 public class ApplyConductionAction : PolibActionBase
 {
     public WorldCoordinates Coordinates;

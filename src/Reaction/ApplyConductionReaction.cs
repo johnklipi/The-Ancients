@@ -1,6 +1,7 @@
 using Polibrary.PolyScript;
-namespace Ancients;
+using Ancients.Action;
 
+namespace Ancients.Reaction;
 public class ApplyConductionReaction : PolibReactionBase
 {
     protected ApplyConductionAction action;

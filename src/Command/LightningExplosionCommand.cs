@@ -1,6 +1,7 @@
-using Ancients;
+using Ancients.Action;
 using Polibrary.PolyScript;
 
+namespace Ancients.Command;
 public class LightningExplosionCommand : PolibCommandBase
 {
     public WorldCoordinates Coordinates;

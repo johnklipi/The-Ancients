@@ -7,11 +7,11 @@ using Il2Gen = Il2CppSystem.Collections.Generic;
 
 namespace Ancients;
 
-public static class Redirection
+public static class RedirectionManager
 {
     public static void Load(ManualLogSource logger)
     {
-        Harmony.CreateAndPatchAll(typeof(Redirection));
+        Harmony.CreateAndPatchAll(typeof(RedirectionManager));
     }
 
     [HarmonyPrefix]

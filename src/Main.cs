@@ -17,8 +17,9 @@ public static class Main
         Harmony.CreateAndPatchAll(typeof(Main));
         modLogger = logger;
         logger.LogMessage("Ancients.dll loaded.");
-        modLogger.LogMessage("Version INDEV2");
+        modLogger.LogMessage("Version INDEV3");
 
+        PolyMod.Loader.AddPatchDataType("tribeAbility", typeof(TribeAbility.Type));
         PolyMod.Loader.AddPatchDataType("sfx", typeof(SFXTypes));
         PolyMod.Loader.AddPatchDataType("improvementEffect", typeof(ImprovementEffect));
     }
@@ -28,11 +29,11 @@ public static class Main
     public static void GetEnumShit(Newtonsoft.Json.Linq.JObject rootObject)
     {
         PolibCommandManager.RegisterCommand<DischargeCommand>("dischargecommand");
-        PolibCommandManager.RegisterCommand<ExcavateCommand>("excavatecommand");
+        PolibCommandManager.RegisterCommand<ExcavateCommandObsolete>("excavatecommand");
         PolibCommandManager.RegisterCommand<LightningExplosionCommand>("lightningexplosioncommand");
 
         PolibActionManager.RegisterAction<DischargeAction>("dischargeaction");
-        PolibActionManager.RegisterAction<ExcavateAction>("excavateaction");
+        PolibActionManager.RegisterAction<ExcavateActionObsolete>("excavateaction");
         PolibActionManager.RegisterAction<ChargeAction>("chargeaction");
         PolibActionManager.RegisterAction<LightningStrikeAction>("lightningstrikeaction");
         PolibActionManager.RegisterAction<ApplyConductionAction>("applyconductionaction");
@@ -40,7 +41,7 @@ public static class Main
         PolibActionManager.RegisterAction<LightningExplosionAction>("lightningexplosionaction");
 
         PolibReactionManager.AssignReaction<DischargeReaction>("dischargeaction");
-        PolibReactionManager.AssignReaction<ExcavateReaction>("excavateaction");
+        PolibReactionManager.AssignReaction<ExcavateReactionObsolete>("excavateaction");
         PolibReactionManager.AssignReaction<ChargeReaction>("chargeaction");
         PolibReactionManager.AssignReaction<LightningStrikeReaction>("lightningstrikeaction");
         PolibReactionManager.AssignReaction<ApplyConductionReaction>("applyconductionaction");
@@ -138,7 +139,7 @@ public static class Main
 
         if (tile.unit.HasAbility(Excavate) && !tile.unit.attacked)
         {
-            ExcavateCommand command = PolibCommandManager.MakeIl2CppCommand<ExcavateCommand>();
+            ExcavateCommandObsolete command = PolibCommandManager.MakeIl2CppCommand<ExcavateCommandObsolete>();
             command.Coordinates = tile.coordinates;
             command.PlayerId = player.Id;
             CommandUtils.AddCommand(gameState, __result, command, includeUnavailable);

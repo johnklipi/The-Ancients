@@ -2,442 +2,55 @@
     "tribeData": {
         "ancients": {
             "idx": -1,
-            "startingStars": 5,
+            "startingStars": 2,
             "color": 48127,
             "language": "pol,topan,poly,to,pia,ria,pius,polan,ran,ol,tes,la,sa,tor,ci,te,ty,cap,kap,sua,ius,xin,ouy,urk,ki,dor,wast,tza,on,aqu,cy",
-            "startingUnit": "archeologist_unit",
+            "startingUnit": "warrior_unit",
             "category": 2,
             "terrainModifier":{
-                "mountain": 0.5,
-                "forest": 0.2
+                "mountain": 1,
+                "forest": 0.5
             },
             "resourceModifier":{
-                "metal": 1.5,
-                "fruit": 0.8,
-                "game": 0,
+                "metal": 0,
+                "fruit": 0.6,
+                "game": 0.6,
                 "crop": 0.6
             },
             "startingTech":[
                 "basic",
-                "animation_tech"
+                "hunting",
+                "organization",
+                "fishing",
+                "climbing",
+                "riding"
             ],
             "startingResource":[
                 "fruit",
                 "fruit"
             ],
             "tribeAbilities":[
-
+                "techless",
+                "ruinspawner"
             ],
             "techOverrides":{
-                "hunting": "animation_tech"
             },
             "unitOverrides":{
                 "warrior": "warrior_unit",
-                "mindbender": "archeologist_unit",
-                "catapult": "railcannon_unit",
+                "giant": "none",
+                "dagger": "dagger_unit",
+                "catapult": "teslatower_unit",
                 "knight": "spark_unit",
-                "archer": "archer_unit",
+                "archer": "railcannon_unit",
                 "rider": "rider_unit",
-                "giant": "mjolnir_unit",
-                "dagger": "dagger_unit"
+                "defender": "sentry_unit",
+                "swordsman": "accumulator_unit"
             },
             "improvementOverrides":{
-                "market": "animarket_improvement"
+                "mine": "lightningrod_improvement",
+                "forge": "animaconduit_improvement"
             },
-            "preview": [
-                {
-                    "x": -3,
-                    "y": -1,
-                    "terrainType": "ocean",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "ruin"
-                },
-                {
-                    "x": -3,
-                    "y": 0,
-                    "terrainType": "water",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -3,
-                    "y": 2,
-                    "terrainType": "water",
-                    "resourceType": "fish",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -3,
-                    "y": 4,
-                    "terrainType": "water",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -3,
-                    "y": 5,
-                    "terrainType": "water",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -3,
-                    "y": 6,
-                    "terrainType": "field",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -2,
-                    "y": -2,
-                    "terrainType": "water",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -2,
-                    "y": -1,
-                    "terrainType": "water",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -2,
-                    "y": 0,
-                    "terrainType": "field",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -2,
-                    "y": 1,
-                    "terrainType": "forest",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -2,
-                    "y": 2,
-                    "terrainType": "field",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -2,
-                    "y": 3,
-                    "terrainType": "forest",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "foresttemple"
-                },
-                {
-                    "x": -2,
-                    "y": 4,
-                    "terrainType": "field",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -2,
-                    "y": 5,
-                    "terrainType": "forest",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -2,
-                    "y": 6,
-                    "terrainType": "forest",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -1,
-                    "y": -2,
-                    "terrainType": "water",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -1,
-                    "y": -1,
-                    "terrainType": "mountain",
-                    "resourceType": "metal",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -1,
-                    "y": 0,
-                    "terrainType": "field",
-                    "resourceType": "none",
-                    "unitType": "giant",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -1,
-                    "y": 1,
-                    "terrainType": "water",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -1,
-                    "y": 2,
-                    "terrainType": "field",
-                    "resourceType": "none",
-                    "unitType": "rider",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -1,
-                    "y": 3,
-                    "terrainType": "forest",
-                    "resourceType": "game",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -1,
-                    "y": 4,
-                    "terrainType": "field",
-                    "resourceType": "crop",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -1,
-                    "y": 5,
-                    "terrainType": "field",
-                    "resourceType": "fruit",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": -1,
-                    "y": 6,
-                    "terrainType": "field",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 0,
-                    "y": -3,
-                    "terrainType": "ocean",
-                    "resourceType": "starfish",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 0,
-                    "y": -2,
-                    "terrainType": "water",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 0,
-                    "y": -1,
-                    "terrainType": "field",
-                    "resourceType": "fruit",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 0,
-                    "y": 0,
-                    "terrainType": "forest",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 0,
-                    "y": 1,
-                    "terrainType": "forest",
-                    "resourceType": "none",
-                    "unitType": "swordsman",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 0,
-                    "y": 2,
-                    "terrainType": "mountain",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 0,
-                    "y": 3,
-                    "terrainType": "forest",
-                    "resourceType": "none",
-                    "unitType": "archer",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 0,
-                    "y": 4,
-                    "terrainType": "field",
-                    "resourceType": "fruit",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 0,
-                    "y": 5,
-                    "terrainType": "forest",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 0,
-                    "y": 6,
-                    "terrainType": "forest",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 1,
-                    "y": -2,
-                    "terrainType": "water",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 1,
-                    "y": -1,
-                    "terrainType": "field",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 1,
-                    "y": 0,
-                    "terrainType": "field",
-                    "resourceType": "fruit",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 1,
-                    "y": 1,
-                    "terrainType": "forest",
-                    "resourceType": "none",
-                    "unitType": "warrior",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 1,
-                    "y": 2,
-                    "terrainType": "forest",
-                    "resourceType": "game",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 1,
-                    "y": 3,
-                    "terrainType": "forest",
-                    "resourceType": "none",
-                    "unitType": "archer",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 1,
-                    "y": 4,
-                    "terrainType": "field",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 1,
-                    "y": 5,
-                    "terrainType": "mountain",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 1,
-                    "y": 6,
-                    "terrainType": "field",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 2,
-                    "y": -2,
-                    "terrainType": "ocean",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "ruin"
-                },
-                {
-                    "x": 2,
-                    "y": -1,
-                    "terrainType": "water",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 2,
-                    "y": 0,
-                    "terrainType": "ocean",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 2,
-                    "y": 1,
-                    "terrainType": "water",
-                    "resourceType": "fish",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 2,
-                    "y": 3,
-                    "terrainType": "water",
-                    "resourceType": "none",
-                    "unitType": "none",
-                    "improvementType": "none"
-                },
-                {
-                    "x": 2,
-                    "y": 5,
-                    "terrainType": "water",
-                    "resourceType": "fish",
-                    "unitType": "none",
-                    "improvementType": "none"
-                }
-            ]
+            "preview": []
         }
     },
     "techData": {
@@ -445,34 +58,6 @@
             "improvementUnlocks": [
                 "+animacollect_improvement"
             ]
-        },
-        "tesla_secrettech": {
-            "unitUnlocks": [
-                "teslatower_unit"
-            ],
-			"cost": 0,
-			"idx": -1
-        },
-        "accumulator_secrettech": {
-            "unitUnlocks": [
-                "accumulator_unit"
-            ],
-			"cost": 0,
-			"idx": -1
-        },
-        "drone_secrettech": {
-            "unitUnlocks": [
-                "drone_unit"
-            ],
-			"cost": 0,
-			"idx": -1
-        },
-        "sentry_secrettech": {
-            "unitUnlocks": [
-                "sentry_unit"
-            ],
-			"cost": 0,
-			"idx": -1
         },
         "animation_tech": {
             "improvementUnlocks": [
@@ -500,7 +85,7 @@
                 "animatotem_improvement"
             ],
             "unitUnlocks": [
-                "railcannon_unit"
+                "catapult"
             ],
 			"cost": 3,
 			"idx": -1
@@ -541,7 +126,6 @@
             "weapon": 1,
             "prefab": "warrior"
         },
-
         "archer_unit": {
             "idx": -1,
             "health": 100,
@@ -559,44 +143,32 @@
             "weapon": 3,
             "prefab": "archer"
         },
-
         "rider_unit": {
             "idx": -1,
             "health": 100,
             "defence": 10,
             "movement": 2,
             "range": 1,
-            "attack": 20,
+            "attack": 15,
             "cost": 3,
             "unitAbilities": [
                 "land",
                 "dash",
                 "escape",
                 "fortify",
-                "charge_ability"
+                "capacitor_ability"
             ],
             "weapon": 1,
-            "prefab": "rider"
-        },
-
-        "archeologist_unit": {
-            "idx": -1,
-            "health": 100,
-            "defence": 10,
-            "movement": 1,
-            "range": 1,
-            "attack": 0,
-            "cost": 5,
-            "unitAbilities": [
-                "convert",
-                "stiff",
-                "static",
-                "excavation_ability"
+            "prefab": "rider",
+            "maxCharge": 2,
+            "chargeConsumptionAmount": 2,
+            "chargeConsumptionEvent": [
+                "attack"
             ],
-            "weapon": 1,
-            "prefab": "warrior"
+            "chargeBuff": [
+                "attack"
+            ]
         },
-
         "teslatower_unit": {
             "idx": -1,
             "health": 100,
@@ -623,14 +195,13 @@
                 "attack"
             ]
         },
-
         "accumulator_unit": {
             "idx": -1,
             "health": 200,
             "defence": 30,
             "movement": 1,
             "range": 0,
-            "attack": 15,
+            "attack": 25,
             "cost": 8,
             "unitAbilities": [
                 "stiff",
@@ -639,8 +210,7 @@
                 "discharge_ability"
             ],
             "weapon": 5,
-            "prefab": "defender",
-
+            "prefab": "swordsman",
             "maxCharge": 3,
             "chargeConsumptionAmount": 3,
             "chargeConsumptionEvent": [
@@ -650,35 +220,6 @@
                 "attack"
             ]
         },
-
-        "drone_unit": {
-            "idx": -1,
-            "health": 100,
-            "defence": 10,
-            "movement": 2,
-            "range": 1,
-            "attack": 25,
-            "cost": 3,
-            "unitAbilities": [
-                "dash",
-                "escape",
-                "fly",
-                "static",
-                "capacitor_ability"
-            ],
-            "weapon": 7,
-            "prefab": "rammership",
-
-            "maxCharge": 1,
-            "chargeConsumptionAmount": 1,
-            "chargeConsumptionEvent": [
-                "attack"
-            ],
-            "chargeBuff": [
-                "movement"
-            ]
-        },
-
         "sentry_unit": {
             "idx": -1,
             "health": 100,
@@ -700,26 +241,32 @@
             "maxCharge": 2,
             "chargeConsumptionAmount": 1
         },
-
         "railcannon_unit": {
             "health": 100,
-			"defence": 0,
+			"defence": 10,
 			"movement": 1,
-			"range": 3,
-			"attack": 40,
+			"range": 2,
+			"attack": 20,
 			"cost": 8,
 			"weapon": 6,
 			"unitAbilities": [
 				"stiff",
 				"land",
                 "dash",
-                "eightway_ability"
+                "capacitor_ability"
 			],
+            "maxCharge": 2,
+            "chargeConsumptionAmount": 2,
+            "chargeConsumptionEvent": [
+                "attack"
+            ],
+            "chargeBuff": [
+                "attack"
+            ],
 			"idx": -1,
 
             "prefab": "warrior"
         },
-
         "spark_unit": {
             "health": 50,
 			"defence": 10,
@@ -742,58 +289,6 @@
 
             "prefab": "spark"
         },
-
-        "mjolnir_unit": {
-            "health": 300,
-			"defence": 40,
-			"movement": 1,
-			"range": 1,
-			"attack": 35,
-			"cost": 8,
-			"weapon": 7,
-			"unitAbilities": [
-				"land",
-                "static",
-                "capacitor_ability",
-                "surprise",
-                "polib_lazy",
-                "push_ability",
-                "lightning_ability"
-			],
-            "hidden": true,
-			"idx": -1,
-
-            "prefab": "swordsman",
-            "maxCharge": 1,
-            "chargeConsumptionAmount": 1,
-            "embarksTo": "mjolship_unit"
-        },
-
-        "mjolship_unit": {
-            "health": 300,
-			"defence": 40,
-			"movement": 2,
-			"range": 1,
-			"attack": 25,
-			"cost": 8,
-			"weapon": 7,
-			"unitAbilities": [
-                "stiff",
-                "surprise",
-				"stomp",
-				"swim",
-				"carry",
-				"water",
-				"static",
-                "polib_lazy",
-                "push_ability"
-			],
-            "hidden": true,
-			"idx": -1,
-
-            "prefab": "juggernaut"
-        },
-
         "dagger_unit": {
 			"health": 100,
 			"defence": 10,
@@ -883,12 +378,6 @@
         "lightningrod_improvement": {
 			"cost": 3,
 			"terrainRequirements": [
-				{
-					"terrain": "forest"
-				},
-                {
-					"terrain": "field"
-				},
                 {
                     "terrain": "mountain"
                 }
@@ -901,6 +390,25 @@
 			"idx": -1
 		},
         "animaconduit_improvement": {
+			"cost": 5,
+			"terrainRequirements": [
+                {
+					"terrain": "field"
+				},
+                {
+					"terrain": "forest"
+				}
+			],
+            "improvementAbilities": [
+                "electric_improvementability"
+            ],
+            "rewards": [
+                {"population": 1}
+            ],
+			"maxLevel": 8,
+			"idx": -1
+		},
+        "animaconduit_old_improvement": {
 			"cost": 4,
 			"terrainRequirements": [
                 {
@@ -1008,7 +516,14 @@
             "level": 0
         }
     },
-
+    "tribeAbility": {
+        "techless": {
+            "idx": -1
+        },
+        "ruinspawner": {
+            "idx": -1
+        }
+    },
     "commandType": {
         "dischargecommand": {
             "idx": -1
@@ -1022,9 +537,6 @@
     },
     "actionType": {
         "dischargeaction": {
-            "idx": -1
-        },
-        "ancientsexamineaction": {
             "idx": -1
         },
         "chargeaction": {

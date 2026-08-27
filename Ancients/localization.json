@@ -1,0 +1,195 @@
+{
+    "unit_names_archeologist__unit": {
+        "English": "Archeologist"
+    },
+    "unit_names_warrior__unit": {
+        "English": "Lightning Warrior"
+    },
+    "unit_names_rider__unit": {
+        "English": "Lancer"
+    },
+    "unit_names_archer__unit": {
+        "English": "Lightning Archer"
+    },
+    "unit_names_railcannon__unit": {
+        "English": "Railgunner"
+    },
+    "unit_names_teslatower__unit": {
+        "English": "Tesla Coil"
+    },
+    "unit_names_accumulator__unit": {
+        "English": "Accumulator"
+    },
+    "unit_names_drone__unit": {
+        "English": "Drone"
+    },
+    "unit_names_sentry__unit": {
+        "English": "Sentry"
+    },
+    "unit_names_spark__unit": {
+        "English": "Jumpspark"
+    },
+    "unit_names_mjolnir__unit": {
+        "English": "Mjolnir"
+    },
+    "unit_names_mjolship__unit": {
+        "English": "Mjolship"
+    },
+    "unit_names_dagger__unit": {
+        "English": "Lightning Dagger"
+    },
+
+    "unit_abilities_consumed": {
+        "English": "CONSUMED"
+    },
+    "tooltip_ability_consumed": {
+        "English": "This unit sacrifices itself to attack."
+    },
+    "unit_abilities_excavation__ability": {
+        "English": "EXCAVATE"
+    },
+    "tooltip_ability_excavation__ability": {
+        "English": "This unit can excavate ruins, consuming itself in the process."
+    },
+    "unit_abilities_charge__ability": {
+        "English": "CHARGE"
+    },
+    "tooltip_ability_charge__ability": {
+        "English": "This unit can charge units with the 'Capacitor' ability."
+    },
+    "unit_abilities_eightway__ability": {
+        "English": "8-WAY"
+    },
+    "tooltip_ability_eightway__ability": {
+        "English": "This unit can only attack in an 8-way pattern."
+    },
+    "unit_abilities_capacitor__ability": {
+        "English": "CAPACITOR"
+    },
+    "tooltip_ability_capacitor__ability": {
+        "English": "This unit can store charges to become more powerful."
+    },
+    "unit_abilities_discharge__ability": {
+        "English": "DISCHARGE"
+    },
+    "tooltip_ability_discharge__ability": {
+        "English": "This unit can unleash an explosion based on its charge."
+    },
+    "unit_abilities_shock__ability": {
+        "English": "JUMPSTART"
+    },
+    "tooltip_ability_shock__ability": {
+        "English": "This unit can shock enemies, making them conductive. Conductive units shock nearby units, then explode after death."
+    },
+    "unit_abilities_push__ability": {
+        "English": "PUSH"
+    },
+    "tooltip_ability_push__ability": {
+        "English": "This unit can push enemies away."
+    },
+
+
+    "actionbox_unit_charge__effect": {
+        "English": "Charge"
+    },
+    "actionbox_unit_conductive__effect": {
+        "English": "Conductive"
+    },
+
+    "building_names_lightningrod__improvement": {
+        "English": "Lightning Rod"
+    },
+    "building_names_animaconduit__improvement": {
+        "English": "Ænima Conduit"
+    },
+    "building_names_animacollect__improvement": {
+        "English": "Ritual"
+    },
+    "building_names_animatotem__improvement": {
+        "English": "Ænima Totem"
+    },
+    "building_names_animarket__improvement": {
+        "English": "Ænimarket"
+    },
+
+    "building_ability_lightning__improvementability": {
+        "English": "{0} gets struck by lightning on the beginning of every turn. Lightning either charges chargeable units standing on {0}, or powers adjacent infrastructure."
+    },
+    "building_ability_electric__improvementability": {
+        "English": "{0} uses power from adjacent lightning to gain 1 level."
+    },
+    "building_ability_collect__improvementability": {
+        "English": "You can collect 1 population from {0} once at max level."
+    },
+    "building_ability_maxed__improvementability": {
+        "English": "When built, {0} gets leveled up to its maximum level."
+    },
+
+    "action_info_excavatecommand": {
+        "English": "Excavate"
+    },
+    "action_info_dischargecommand": {
+        "English": "Discharge"
+    },
+
+    "world_ancients_popup_header": {
+        "English": "Ancient Writings"
+    },
+    "world_ancients_popup_description": {
+        "English": "You found ancient writings detailing forgotten applications of lightning magic. Your researchers could only partially decode the writings and are divided between 2 possible meanings."
+    },
+    "world_ancients_popup_description2": {
+        "English": "You found ancient writings detailing forgotten applications of lightning magic. Your researchers successfully decoded the writings."
+    },
+
+    "technology_names_tesla__secrettech": {
+        "English": "High Voltage"
+    },
+    "technology_names_accumulator__secrettech": {
+        "English": "Charge Storage"
+    },
+    "technology_names_drone__secrettech": {
+        "English": "Aviation"
+    },
+    "technology_names_sentry__secrettech": {
+        "English": "Redirection"
+    },
+    "technology_names_lightning__tech": {
+        "English": "Ḻightning"
+    },
+    "technology_names_animation__tech": {
+        "English": "Ænimation"
+    },
+    "technology_names_lunacy__tech": {
+        "English": "Ḻunacy"
+    },
+    "technology_names_archery__tech": {
+        "English": "Archery"
+    },
+
+    "wcontroller_reward_highvoltage__secretreward": {
+        "English": "High Voltage"
+    },
+    "wcontroller_reward_chargestorage__secretreward": {
+        "English": "Charge Storage"
+    },
+    "wcontroller_reward_aviation__secretreward": {
+        "English": "Aviation"
+    },
+    "wcontroller_reward_logistics__secretreward": {
+        "English": "Charge Logistics"
+    },
+    "wcontroller_reward_redirection__secretreward": {
+        "English": "Redirection"
+    },
+
+    "tribes_ancients": {
+        "English": "Ancients"
+    },
+    "tribes_ancients_info": {
+        "English": "Thought to be long defeated, the Ancients rise again! These descendants of the old Polytopian Empire will do anything to restore their rule."
+    },
+    "tribes_info2__ancients": {
+        "English": "The {0} have the ability to use forbidden lunar-lightning magic to create lifeforce out of thin air, power ancient technology, and electrocute anyone standing in their way of rebuilding their empire!"
+    }
+}

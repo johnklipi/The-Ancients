@@ -16,12 +16,14 @@ namespace Ancients;
 public static class Main
 {
     public static ManualLogSource modLogger;
+    private static string ModVersion = "ALPHA1";
+
     public static void Load(ManualLogSource logger)
     {
         Harmony.CreateAndPatchAll(typeof(Main));
         modLogger = logger;
         logger.LogMessage("Ancients.dll loaded.");
-        modLogger.LogMessage("Version INDEV3");
+        modLogger.LogMessage($"Version {ModVersion}");
 
         PolyMod.Loader.AddPatchDataType("tribeAbility", typeof(TribeAbility.Type));
         PolyMod.Loader.AddPatchDataType("sfx", typeof(SFXTypes));
@@ -30,7 +32,7 @@ public static class Main
 
     [HarmonyPostfix]
     [HarmonyPatch(typeof(GameLogicData), nameof(GameLogicData.AddGameLogicPlaceholders))]
-    public static void GetEnumShit(Newtonsoft.Json.Linq.JObject rootObject)
+    public static void ProcessEnums(Newtonsoft.Json.Linq.JObject rootObject)
     {
         PolibCommandManager.RegisterCommand<DischargeCommand>("dischargecommand");
         PolibCommandManager.RegisterCommand<ExcavateCommandObsolete>("excavatecommand");

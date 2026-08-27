@@ -50,6 +50,10 @@
                 "mine": "lightningrod_improvement",
                 "forge": "animaconduit_improvement"
             },
+            "cityRewardOverrides": {
+                "workshop": "ancienttech1",
+                "park": "ancienttech5"
+            },
             "preview": []
         }
     },
@@ -499,21 +503,15 @@
     },
 
     "cityRewardData": {
-        "highvoltage_secretreward": {
+        "ancientstech": {
             "idx": -1,
             "level": 0
         },
-        "aviation_secretreward": {
-            "idx": -1,
-            "level": 0
+        "ancienttech1": {
+            "idx": -1
         },
-        "chargestorage_secretreward": {
-            "idx": -1,
-            "level": 0
-        },
-        "redirection_secretreward": {
-            "idx": -1,
-            "level": 0
+        "ancienttech5": {
+            "idx": -1
         }
     },
     "tribeAbility": {

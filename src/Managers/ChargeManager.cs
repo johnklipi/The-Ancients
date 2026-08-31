@@ -10,11 +10,6 @@ namespace Ancients.Manager;
 
 public static class ChargeManager
 {
-    public static void Load(ManualLogSource logger)
-    {
-        Harmony.CreateAndPatchAll(typeof(ChargeManager));
-    }
-
     public static int GetChargeCount(UnitState unit)
     {
         int charges = 0;

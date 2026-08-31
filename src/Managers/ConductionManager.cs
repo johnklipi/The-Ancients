@@ -8,11 +8,6 @@ namespace Ancients.Manager;
 
 public static class ConductionManager
 {
-    public static void Load(ManualLogSource logger)
-    {
-        Harmony.CreateAndPatchAll(typeof(ConductionManager));
-    }
-
     [HarmonyPostfix]
     [HarmonyPatch(typeof(AttackCommand), nameof(AttackCommand.ExecuteDefault))]
     private static void AttackCommand_Execute(GameState gameState, AttackCommand __instance)

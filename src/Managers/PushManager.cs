@@ -10,11 +10,6 @@ namespace Ancients.Manager;
 
 public static class PushManager
 {
-    public static void Load(ManualLogSource logger)
-    {
-        Harmony.CreateAndPatchAll(typeof(PushManager));
-    }
-
     [HarmonyPrefix]
     [HarmonyPatch(typeof(AttackCommand), nameof(AttackCommand.ExecuteDefault))]
     private static void AttackCommand_ExecuteDefault(AttackCommand __instance, GameState gameState)

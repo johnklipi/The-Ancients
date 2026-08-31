@@ -1,4 +1,4 @@
-using BepInEx.Logging;
+using DG.Tweening;
 using HarmonyLib;
 using Polytopia.Data;
 using UnityEngine.EventSystems;
@@ -7,11 +7,6 @@ namespace Ancients.Manager;
 
 public static class TechManager
 {
-    public static void Load(ManualLogSource logger)
-    {
-        Harmony.CreateAndPatchAll(typeof(TechManager));
-    }
-
     [HarmonyPostfix]
     [HarmonyPatch(typeof(CityRewardAction), nameof(CityRewardAction.Execute))]
     private static void CityRewardAction_Execute(CityRewardAction __instance, GameState state)
@@ -56,17 +51,17 @@ public static class TechManager
             return;
 
         bool? hasFreeTech = HasFreeTech(state, playerState);
-        if(hasFreeTech == null || (bool)hasFreeTech)
+        if(hasFreeTech == null)
             return;
 
-        __result = false;
+        __result = (bool)hasFreeTech;
     }
 
     [HarmonyPostfix]
     [HarmonyPatch(typeof(TechItem), nameof(TechItem.RefreshState))]
     private static void TechItem_Refresh(TechItem __instance, bool forceUnavaliable = false)
     {
-        if(__instance.state != TechItem.State.Available)
+        if(__instance.state == TechItem.State.Unavailable || __instance.state == TechItem.State.Complete)
             return;
 
         GameState state = GameManager.GameState;
@@ -75,38 +70,84 @@ public static class TechManager
 
         PlayerState playerState = GameManager.LocalPlayer;
         bool? hasFreeTech = HasFreeTech(state, playerState);
-        if(hasFreeTech == null || (bool)hasFreeTech)
+        if(hasFreeTech == null)
+            return;
+        __instance.resourceWidget.gameObject.SetActive(false);
+
+        if((bool)hasFreeTech || __instance.state == TechItem.State.Unavailable || __instance.state == TechItem.State.Complete)
             return;
 
         __instance.shine.gameObject.SetActive(true);
         __instance.outline.gameObject.SetActive(true);
-        __instance.resourceWidget.gameObject.SetActive(false);
         __instance.iconContainer.gameObject.SetActive(true);
         __instance.bg.color = ColorUtil.SetAlphaOnColor(ColorConstants.blue, 1f);
         __instance.outline.color = ColorConstants.red;
         __instance.button.CanRegisterHover = false;
     }
 
+    [HarmonyPostfix]
+    [HarmonyPatch(typeof(GameLogicData), nameof(GameLogicData.GetTechPrice))]
+	private static void GameLogicData_GetTechPrice(ref int __result, TechData techData, PlayerState playerState, GameState state)
+    {
+        bool? hasFreeTech = HasFreeTech(state, playerState);
+        if(hasFreeTech == null || !(bool)hasFreeTech)
+            return;
+
+        __result = 0;
+    }
 
     [HarmonyPostfix]
     [HarmonyPatch(typeof(TechItem), nameof(TechItem.OnClicked))]
-    private static void TechItem_Refresh(TechItem __instance, int id, BaseEventData eventData)
+    private static void TechItem_OnClicked(TechItem __instance, int id, BaseEventData eventData)
     {
-        if(__instance.state != TechItem.State.Available)
-            return;
-
         GameState state = GameManager.GameState;
         if(state == null)
             return;
 
         PlayerState playerState = GameManager.LocalPlayer;
         bool? hasFreeTech = HasFreeTech(state, playerState);
-        if(hasFreeTech == null || (bool)hasFreeTech)
+        if(hasFreeTech == null && __instance.activePopup == null)
             return;
 
-        UIButtonBase_UI2.ButtonStyle buttonStyle = UIButtonBase_UI2.ButtonStyle.Disabled;
-        __instance.activePopup.MainButton.SetStyle(buttonStyle).ButtonEnabled = buttonStyle != UIButtonBase_UI2.ButtonStyle.Disabled;
+        __instance.activePopup.TopRightItem.gameObject.SetActive(false);
+
+        if(__instance.state == TechItem.State.Available && !(bool)hasFreeTech)
+        {     
+            UIButtonBase_UI2.ButtonStyle buttonStyle = UIButtonBase_UI2.ButtonStyle.Disabled;
+            __instance.activePopup.MainButton.SetStyle(buttonStyle).ButtonEnabled = buttonStyle != UIButtonBase_UI2.ButtonStyle.Disabled;
+        }
+
         __instance.activePopup.RunLayout();
+    }
+
+    [HarmonyPostfix]
+    [HarmonyPatch(typeof(ActionUtils), nameof(ActionUtils.LearnTech))]
+    private static void ActionUtils_LearnTech(GameState gameState,
+        PlayerState playerState, TechData.Type type, int cost, bool shouldUseActions)
+    {
+        bool? hasFreeTech = HasFreeTech(gameState, playerState);
+        if(hasFreeTech == null)
+            return;
+
+        if(!(bool)hasFreeTech)
+        {
+            Main.modLogger.LogError("Learned a tech while having no free tech. WTF?");
+            return;
+        }
+        TileData capital = gameState.Map.GetTile(playerState.startTile);
+        if(capital.improvement == null || !capital.HasImprovement(ImprovementData.Type.City))
+        {
+            Main.modLogger.LogError("Capital city wasnt found. The fuck?");
+            return;
+        }
+
+        if(capital.improvement.rewards == null)
+        {
+            capital.improvement.rewards = new();
+            return;
+        }
+
+        capital.improvement.rewards.Remove(EnumCache<CityReward>.GetType("ancientstech"));
     }
 
     private static bool? HasFreeTech(GameState state, PlayerState playerState)

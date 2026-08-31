@@ -8,11 +8,6 @@ namespace Ancients.Manager;
 
 public static class RedirectionManager
 {
-    public static void Load(ManualLogSource logger)
-    {
-        Harmony.CreateAndPatchAll(typeof(RedirectionManager));
-    }
-
     [HarmonyPrefix]
     [HarmonyPatch(typeof(ActionUtils), nameof(ActionUtils.PerformAttackDefault))]
     private static bool ActionUtils_PerformAttackDefault(GameState gameState, byte playerId, WorldCoordinates origin, WorldCoordinates target, int damage)

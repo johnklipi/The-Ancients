@@ -21,8 +21,15 @@ public static class Main
     public static void Load(ManualLogSource logger)
     {
         Harmony.CreateAndPatchAll(typeof(Main));
+        Harmony.CreateAndPatchAll(typeof(ChargeManager));
+        Harmony.CreateAndPatchAll(typeof(ConductionManager));
+        Harmony.CreateAndPatchAll(typeof(LightningManager));
+        Harmony.CreateAndPatchAll(typeof(PushManager));
+        Harmony.CreateAndPatchAll(typeof(RedirectionManager));
+        Harmony.CreateAndPatchAll(typeof(TechManager));
+
         modLogger = logger;
-        logger.LogMessage("Ancients.dll loaded.");
+        logger.LogMessage("Ancients PolyScript is loaded.");
         modLogger.LogMessage($"Version {ModVersion}");
 
         PolyMod.Loader.AddPatchDataType("tribeAbility", typeof(TribeAbility.Type));
@@ -67,11 +74,6 @@ public static class Main
             || !EnumCache<UnitEffect>.TryGetType("conductive_effect", out Conductive)
             || !EnumCache<UnitEffect>.TryGetType("charge_effect", out Charged)
 
-            || !EnumCache<CityReward>.TryGetType("highvoltage_secretreward", out var teslaReward) 
-            || !EnumCache<CityReward>.TryGetType("aviation_secretreward", out var droneReward) 
-            || !EnumCache<CityReward>.TryGetType("chargestorage_secretreward", out var accReward) 
-            || !EnumCache<CityReward>.TryGetType("redirection_secretreward", out var sentryReward) 
-
             || !EnumCache<ImprovementAbility.Type>.TryGetType("lightning_improvementability", out Lightning)
             || !EnumCache<ImprovementAbility.Type>.TryGetType("electric_improvementability", out Electric)
             || !EnumCache<ImprovementAbility.Type>.TryGetType("collect_improvementability", out Collect)
@@ -85,14 +87,6 @@ public static class Main
 			modLogger.LogInfo("couldnt find some enumcache shit");
 			return;
 		}
-
-        SecretRewards.AddRange(new CityReward[]
-        {
-            teslaReward,
-            droneReward,
-            accReward,
-            sentryReward
-        });
         
         PolibUtils.ParsePerEach<UnitData.Type, int>(rootObject, "unitData", "maxCharge", MaxCharge);
         PolibUtils.ParsePerEach<UnitData.Type, int>(rootObject, "unitData", "chargeConsumptionAmount", ChargeConsumptionAmount);
@@ -108,7 +102,6 @@ public static class Main
     public static Dictionary<UnitData.Type, List<string>> ChargeBuff = new Dictionary<UnitData.Type, List<string>>();
     public static Dictionary<ImprovementData.Type, int> LightningStars = new();
     public static Dictionary<ImprovementData.Type, int> LightningPop = new();
-    public static List<CityReward> SecretRewards = new();
     public static TribeType Ancients;
     public static UnitAbility.Type Discharge;
     public static UnitAbility.Type Charge;

@@ -9,11 +9,6 @@ namespace Ancients.Manager;
 
 public static class LightningManager
 {
-    public static void Load(ManualLogSource logger)
-    {
-        Harmony.CreateAndPatchAll(typeof(LightningManager));
-    }
-
     [HarmonyPostfix]
     [HarmonyPatch(typeof(StartTurnAction), nameof(StartTurnAction.ExecuteDefault))]
     private static void StartTurn(GameState gameState, StartTurnAction __instance)

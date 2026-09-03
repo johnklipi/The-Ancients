@@ -308,8 +308,7 @@
                 }
 			],
             "improvementAbilities": [
-                "lightning_improvementability",
-                "limited"
+                "lightning_improvementability"
             ],
 			"maxLevel": 0,
 			"idx": -1
@@ -324,7 +323,13 @@
 					"terrain": "forest"
 				}
 			],
+			"adjacencyRequirements": [
+				{
+					"improvement": "ancrod"
+				}
+			],
             "improvementAbilities": [
+                "limited",
                 "powerstorage_improvementability"
             ],
             "rewards": [
@@ -332,7 +337,19 @@
             ],
 			"maxLevel": 8,
 			"idx": -1
-		}
+		},
+        "powercollect_improvement": {
+            "idx": -1,
+            "cost": 0,
+            "improvementAbilities": [
+                "discrete"
+            ],
+            "rewards": [
+                {
+                    "population": 1
+                }
+            ]
+        }
     },
 
     "cityRewardData": {

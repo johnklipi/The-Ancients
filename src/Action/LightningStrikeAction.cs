@@ -52,13 +52,14 @@ public class LightningStrikeAction : PolibActionBase
 
             ImprovementData rodNeighborData = state.GameLogicData.GetImprovementData(rodNeighbor.improvement.type);
             if (!rodNeighborData.HasAbility(Main.powerstorage_improvementability))
-            continue;
+                continue;
 
             if (rodNeighbor.improvement.level < rodNeighborData.maxLevel)
             {
                 if(rodNeighbor.effects == null)
                     rodNeighbor.effects = new();
                 rodNeighbor.effects.Add(Main.powerstored);
+                ActionUtils.UpdateImprovementLevel(state, PlayerId, rodNeighbor); // cant do surrounding check cuz i dont have adjacency improvement
             }
         }
     }

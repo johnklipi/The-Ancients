@@ -31,13 +31,15 @@ public static class LightningManager
     [HarmonyPatch(typeof(ActionUtils), nameof(ActionUtils.CalculateImprovementLevel))]
     private static void ActionUtils_CalculateImprovementLevel(ref int __result, GameState gameState, TileData tile)
     {
-		if (tile.improvement == null
+		if (!gameState.TryGetPlayer(tile.owner, out PlayerState playerState)
+            || tile.improvement == null
             || !gameState.GameLogicData.TryGetData(tile.improvement.type, out ImprovementData improvementData)
             || !improvementData.HasAbility(Main.powerstorage_improvementability))
 		{
             return;
 		}
-		int num = __result;
+
+		int num = 1;
         if(tile.effects == null)
             tile.effects = new();
 
@@ -46,19 +48,49 @@ public static class LightningManager
 
         foreach(var tileEffect in tile.effects)
         {
+            if(tileEffect == Main.powerstored)
+                num++;
         }
-        if(tile.HasEffect(Main.powerstored))
+		int val = improvementData.MaxLevel(playerState, gameState);
+		if (improvementData.maxLevel > 0)
+			num = Math.Min(num, val);
+
 		__result = num;
     }
 
-    /*    
     [HarmonyPostfix]
-    [HarmonyPatch(typeof(Building), nameof(Building.UpdateObject), typeof(MapRenderContext), typeof(SkinVisualsTransientData))]
-    private static void EffectColor(Building __instance, MapRenderContext ctx, SkinVisualsTransientData transientSkinData)
+    [HarmonyPatch(typeof(ImprovementLevelUpAction), nameof(ImprovementLevelUpAction.ExecuteDefault))]
+    private static void ImprovementLevelUpAction_ExecuteDefault(ImprovementLevelUpAction __instance, GameState state)
     {
-        if (__instance.state.HasEffect(Main.Critical))
+        TileData tile = state.Map.GetTile(__instance.Coordinates);
+
+		if (!state.TryGetPlayer(tile.owner, out PlayerState playerState)
+            || tile.improvement == null
+            || !state.GameLogicData.TryGetData(tile.improvement.type, out ImprovementData improvementData)
+            || !improvementData.HasAbility(Main.powerstorage_improvementability))
+		{
+            return;
+		}
+
+        if(tile.effects == null)
+            tile.effects = new();
+
+        if(!tile.HasEffect(Main.powerstored))
+            return;
+
+		if (tile.improvement.level != improvementData.MaxLevel(playerState, state))
+            return;
+
+        var filteredEffects = new Il2CppSystem.Collections.Generic.List<TileData.EffectType>();
+        foreach (TileData.EffectType effect in tile.effects)
         {
-            TerrainMaterialHelper.SetSpriteTint(__instance.SpriteRenderer, new UnityEngine.Color(1, 0, 0));
+            if (effect != Main.powerstored)
+                filteredEffects.Add(effect);
         }
-    }*/
+
+        tile.effects = filteredEffects;
+        tile.improvement.level = 1;
+        state.ActionStack.Add(new IncreasePopulationAction(__instance.PlayerId, tile.coordinates, tile.rulingCityCoordinates, 60));
+    }
+
 }

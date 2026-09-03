@@ -90,17 +90,8 @@
     "building_names_ancrod": {
         "English": "Lightning Rod"
     },
-    "building_names_animaconduit__improvement": {
-        "English": "Ænima Conduit"
-    },
-    "building_names_animacollect__improvement": {
-        "English": "Ritual"
-    },
-    "building_names_animatotem__improvement": {
-        "English": "Ænima Totem"
-    },
-    "building_names_animarket__improvement": {
-        "English": "Ænimarket"
+    "building_names_ancpowerplant": {
+        "English": "Power Plant"
     },
 
     "building_ability_lightning__improvementability": {
@@ -131,31 +122,6 @@
     },
     "world_ancients_popup_description2": {
         "English": "You found ancient writings detailing forgotten applications of lightning magic. Your researchers successfully decoded the writings."
-    },
-
-    "technology_names_tesla__secrettech": {
-        "English": "High Voltage"
-    },
-    "technology_names_accumulator__secrettech": {
-        "English": "Charge Storage"
-    },
-    "technology_names_drone__secrettech": {
-        "English": "Aviation"
-    },
-    "technology_names_sentry__secrettech": {
-        "English": "Redirection"
-    },
-    "technology_names_lightning__tech": {
-        "English": "Ḻightning"
-    },
-    "technology_names_animation__tech": {
-        "English": "Ænimation"
-    },
-    "technology_names_lunacy__tech": {
-        "English": "Ḻunacy"
-    },
-    "technology_names_archery__tech": {
-        "English": "Archery"
     },
 
     "wcontroller_reward_ancinternal__tech": {

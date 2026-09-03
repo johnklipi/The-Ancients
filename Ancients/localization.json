@@ -1,41 +1,32 @@
 {
-    "unit_names_archeologist__unit": {
+    "unit_names_ancarcheologist": {
         "English": "Archeologist"
     },
-    "unit_names_warrior__unit": {
+    "unit_names_ancwarrior": {
         "English": "Lightning Warrior"
     },
-    "unit_names_rider__unit": {
+    "unit_names_anclancer": {
         "English": "Lancer"
     },
-    "unit_names_archer__unit": {
+    "unit_names_ancarcher": {
         "English": "Lightning Archer"
     },
-    "unit_names_railcannon__unit": {
+    "unit_names_ancrailcannon": {
         "English": "Railgunner"
     },
-    "unit_names_teslatower__unit": {
+    "unit_names_ancteslatower": {
         "English": "Tesla Coil"
     },
-    "unit_names_accumulator__unit": {
+    "unit_names_ancaccumulator": {
         "English": "Accumulator"
     },
-    "unit_names_drone__unit": {
-        "English": "Drone"
-    },
-    "unit_names_sentry__unit": {
+    "unit_names_ancsentry": {
         "English": "Sentry"
     },
-    "unit_names_spark__unit": {
+    "unit_names_ancspark": {
         "English": "Jumpspark"
     },
-    "unit_names_mjolnir__unit": {
-        "English": "Mjolnir"
-    },
-    "unit_names_mjolship__unit": {
-        "English": "Mjolship"
-    },
-    "unit_names_dagger__unit": {
+    "unit_names_ancdagger": {
         "English": "Lightning Dagger"
     },
 
@@ -96,7 +87,7 @@
         "English": "Conductive"
     },
 
-    "building_names_lightningrod__improvement": {
+    "building_names_ancrod": {
         "English": "Lightning Rod"
     },
     "building_names_animaconduit__improvement": {
@@ -167,20 +158,11 @@
         "English": "Archery"
     },
 
-    "wcontroller_reward_highvoltage__secretreward": {
-        "English": "High Voltage"
+    "wcontroller_reward_ancinternal__tech": {
+        "English": "Manuscript"
     },
-    "wcontroller_reward_chargestorage__secretreward": {
-        "English": "Charge Storage"
-    },
-    "wcontroller_reward_aviation__secretreward": {
-        "English": "Aviation"
-    },
-    "wcontroller_reward_logistics__secretreward": {
-        "English": "Charge Logistics"
-    },
-    "wcontroller_reward_redirection__secretreward": {
-        "English": "Redirection"
+    "wcontroller_reward_ancfreetech": {
+        "English": "Manuscript"
     },
 
     "tribes_ancients": {

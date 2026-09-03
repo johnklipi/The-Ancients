@@ -25,7 +25,7 @@ public static class RedirectionManager
 
         if (attacker == null) return true;
 
-        if (defender.HasAbility(Main.Protect) || attacker.owner == defender.owner || attacker.HasActivePeaceTreaty(GameManager.GameState, defenderPlayer)) return true;
+        if (defender.HasAbility(Main.protect_ability) || attacker.owner == defender.owner || attacker.HasActivePeaceTreaty(GameManager.GameState, defenderPlayer)) return true;
 
         UnitState protector = null;
 
@@ -35,7 +35,7 @@ public static class RedirectionManager
             if (tileNeighbor.unit == null) continue;
 
             
-            if (tileNeighbor.unit.HasAbility(Main.Protect) && (tileNeighbor.unit.owner == defender.owner || tileNeighbor.unit.HasActivePeaceTreaty(GameManager.GameState, defenderPlayer)))
+            if (tileNeighbor.unit.HasAbility(Main.protect_ability) && (tileNeighbor.unit.owner == defender.owner || tileNeighbor.unit.HasActivePeaceTreaty(GameManager.GameState, defenderPlayer)))
             {
                 if (protector == null)
                 {
@@ -86,7 +86,7 @@ public static class RedirectionManager
 
         if (attacker == null) return true;
 
-        if (defender.HasAbility(Main.Protect) || attacker.owner == defender.owner || attacker.HasActivePeaceTreaty(GameManager.GameState, defenderPlayer)) return true;
+        if (defender.HasAbility(Main.protect_ability) || attacker.owner == defender.owner || attacker.HasActivePeaceTreaty(GameManager.GameState, defenderPlayer)) return true;
 
         UnitState protector = null;
 
@@ -95,7 +95,7 @@ public static class RedirectionManager
             if (tileNeighbor == null) continue;
             if (tileNeighbor.unit == null) continue;
 
-            if (tileNeighbor.unit.HasAbility(Main.Protect) && (tileNeighbor.unit.owner == defender.owner || tileNeighbor.unit.HasActivePeaceTreaty(GameManager.GameState, defenderPlayer)))
+            if (tileNeighbor.unit.HasAbility(Main.protect_ability) && (tileNeighbor.unit.owner == defender.owner || tileNeighbor.unit.HasActivePeaceTreaty(GameManager.GameState, defenderPlayer)))
             {
                 if (protector == null)
                 {

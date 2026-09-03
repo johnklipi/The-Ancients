@@ -38,7 +38,7 @@ public class LightningExplosionAction : PolibActionBase
             }
         }
 
-        if (unit.HasAbility(Main.Capacitor))
+        if (unit.HasAbility(Main.capacitor_ability))
         {
             ChargeAction action = PolibActionManager.MakeIl2CppAction<ChargeAction>();
             action.PlayerId = unit.owner;

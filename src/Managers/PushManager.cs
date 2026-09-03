@@ -1,4 +1,3 @@
-using BepInEx.Logging;
 using HarmonyLib;
 using Polytopia.Data;
 using Polibrary.PolyScript;
@@ -19,7 +18,7 @@ public static class PushManager
 
         if (origin.unit == null || target.unit == null) return;
 
-        if (!origin.unit.HasAbility(Main.Push)) return;
+        if (!origin.unit.HasAbility(Main.push_ability)) return;
 
         PushAction action = PolibActionManager.MakeIl2CppAction<PushAction>();
         action.PlayerId = __instance.PlayerId;
@@ -37,7 +36,7 @@ public static class PushManager
             return;
         }
 
-        if (!unit.HasAbility(UnitAbility.Type.Stomp) || !unit.HasAbility(Main.Push)) return;
+        if (!unit.HasAbility(UnitAbility.Type.Stomp) || !unit.HasAbility(Main.push_ability)) return;
 
         TileData origin = gameState.Map.GetTile(__instance.Path[0]);
 

@@ -11,8 +11,7 @@ public static class TechManager
     [HarmonyPatch(typeof(CityRewardAction), nameof(CityRewardAction.Execute))]
     private static void CityRewardAction_Execute(CityRewardAction __instance, GameState state)
     {
-        if(__instance.Reward != EnumCache<CityReward>.GetType("ancienttech1") &&
-            __instance.Reward != EnumCache<CityReward>.GetType("ancienttech5"))
+        if(__instance.Reward != EnumCache<CityReward>.GetType("ancfreetech"))
             return;
 
         TileData tile = state.Map.GetTile(__instance.Coordinates);
@@ -35,7 +34,7 @@ public static class TechManager
         if(capital.improvement.rewards == null)
             capital.improvement.rewards = new();
 
-        capital.improvement.rewards.Add(EnumCache<CityReward>.GetType("ancientstech"));
+        capital.improvement.rewards.Add(EnumCache<CityReward>.GetType("ancinternal_tech"));
 
     }
 
@@ -147,7 +146,7 @@ public static class TechManager
             return;
         }
 
-        capital.improvement.rewards.Remove(EnumCache<CityReward>.GetType("ancientstech"));
+        capital.improvement.rewards.Remove(EnumCache<CityReward>.GetType("ancinternal_tech"));
     }
 
     private static bool? HasFreeTech(GameState state, PlayerState playerState)
@@ -158,7 +157,7 @@ public static class TechManager
         if(!state.GameLogicData.TryGetData(playerState.tribe, out TribeData tribeData))
             return null;
 
-        if(!tribeData.HasAbility(EnumCache<TribeAbility.Type>.GetType("techless")))
+        if(!tribeData.HasAbility(EnumCache<TribeAbility.Type>.GetType("anctechless")))
             return null;
 
         TileData capital = state.Map.GetTile(playerState.startTile);
@@ -168,6 +167,6 @@ public static class TechManager
             return null;
         }
 
-        return capital.improvement.HasReward(EnumCache<CityReward>.GetType("ancientstech"));
+        return capital.improvement.HasReward(EnumCache<CityReward>.GetType("ancinternal_tech"));
     }
 }

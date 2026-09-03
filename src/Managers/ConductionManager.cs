@@ -15,7 +15,7 @@ public static class ConductionManager
 		UnitState attacker = gameState.Map.GetTile(__instance.Origin).unit;
 		UnitState defender = gameState.Map.GetTile(__instance.Target).unit;
 
-        if (attacker.HasAbility(Main.Shock))
+        if (attacker.HasAbility(Main.shock_ability))
         {
             ApplyConductionAction action = PolibActionManager.MakeIl2CppAction<ApplyConductionAction>();
             action.PlayerId = attacker.owner;
@@ -49,7 +49,7 @@ public static class ConductionManager
         {
             return;
         }
-        if (tile.unit.HasEffect(Main.Conductive))
+        if (tile.unit.HasEffect(Main.conductive_effect))
         {
             foreach (TileData tile1 in gameState.Map.GetArea(tile.coordinates, 1, true, false))
             {

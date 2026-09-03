@@ -32,7 +32,7 @@ public class ApplyConductionAction : PolibActionBase
 
         if (tile != null && tile.unit != null)
         {
-            tile.unit.AddEffect(Main.Conductive);
+            tile.unit.AddEffect(Main.conductive_effect);
         }
     }
 

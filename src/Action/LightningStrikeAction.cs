@@ -31,7 +31,7 @@ public class LightningStrikeAction : PolibActionBase
     {
         TileData origin = state.Map.GetTile(Coordinates);
 
-        if (origin.unit != null && origin.unit.HasAbility(Main.Capacitor) && ChargeManager.GetChargeCount(origin.unit) < ChargeManager.GetMaxCharge(origin.unit.type))
+        if (origin.unit != null && origin.unit.HasAbility(Main.capacitor_ability) && ChargeManager.GetChargeCount(origin.unit) < ChargeManager.GetMaxCharge(origin.unit.type))
         {
             ChargeAction action = PolibActionManager.MakeIl2CppAction<ChargeAction>();
             action.PlayerId = origin.unit.owner;
@@ -51,12 +51,14 @@ public class LightningStrikeAction : PolibActionBase
             continue;
 
             ImprovementData rodNeighborData = state.GameLogicData.GetImprovementData(rodNeighbor.improvement.type);
-            if (!rodNeighborData.HasAbility(Main.Electric))
+            if (!rodNeighborData.HasAbility(Main.powerstorage_improvementability))
             continue;
 
             if (rodNeighbor.improvement.level < rodNeighborData.maxLevel)
             {
-                state.ActionStack.Add(new ImprovementLevelUpAction(state.CurrentPlayer, rodNeighbor.coordinates));
+                if(rodNeighbor.effects == null)
+                    rodNeighbor.effects = new();
+                rodNeighbor.effects.Add(Main.powerstored);
             }
         }
     }

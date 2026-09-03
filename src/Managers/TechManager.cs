@@ -11,31 +11,54 @@ public static class TechManager
     [HarmonyPatch(typeof(CityRewardAction), nameof(CityRewardAction.Execute))]
     private static void CityRewardAction_Execute(CityRewardAction __instance, GameState state)
     {
-        if(__instance.Reward != EnumCache<CityReward>.GetType("ancfreetech"))
-            return;
-
         TileData tile = state.Map.GetTile(__instance.Coordinates);
-		if (tile == null || tile.improvement == null
-            || !state.TryGetPlayer(__instance.PlayerId, out PlayerState playerState))
-			return;
-
-        if(tile.improvement.rewards == null)
-            tile.improvement.rewards = new();
-
-        tile.improvement.rewards.Remove(__instance.Reward);
-
-        TileData capital = state.Map.GetTile(playerState.startTile);
-        if(capital.improvement == null || !capital.HasImprovement(ImprovementData.Type.City))
+        if(__instance.Reward == EnumCache<CityReward>.GetType("ancfreetech"))
         {
-            Main.modLogger.LogInfo("Capital city wasnt found. The fuck?");
-            return;
+            if (tile == null || tile.improvement == null
+                || !state.TryGetPlayer(__instance.PlayerId, out PlayerState playerState))
+                return;
+
+            if(tile.improvement.rewards == null)
+                tile.improvement.rewards = new();
+
+            tile.improvement.rewards.Remove(__instance.Reward);
+
+            TileData capital = state.Map.GetTile(playerState.startTile);
+            if(capital.improvement == null || !capital.HasImprovement(ImprovementData.Type.City))
+            {
+                Main.modLogger.LogInfo("Capital city wasnt found. The fuck?");
+                return;
+            }
+
+            if(capital.improvement.rewards == null)
+                capital.improvement.rewards = new();
+
+            capital.improvement.rewards.Add(EnumCache<CityReward>.GetType("ancinternal_tech"));
         }
+        else if(__instance.Reward == EnumCache<CityReward>.GetType("ancvetspark"))
+        {
+            state.ActionStack.Add(new PromoteAction(__instance.PlayerId, __instance.Coordinates));
+            ActionUtils.TrainUnitOnOccupiedSpace(state, __instance.PlayerId, EnumCache<UnitData.Type>.GetType("ancspark"), tile); // add lightning hit effect
+        }
+        else if(__instance.Reward == EnumCache<CityReward>.GetType("ancspyvision"))
+        {
+            if (tile == null
+                || !state.TryGetPlayer(__instance.PlayerId, out PlayerState playerState))
+                return;
 
-        if(capital.improvement.rewards == null)
-            capital.improvement.rewards = new();
-
-        capital.improvement.rewards.Add(EnumCache<CityReward>.GetType("ancinternal_tech"));
-
+            foreach (var mapTile in state.Map.Tiles)
+            {
+                if (!mapTile.GetExplored(playerState.Id))
+                {
+                    continue;
+                }
+                foreach(var areaTile in state.Map.GetArea(mapTile.coordinates, 1, true, false))
+                {
+                    ActionUtils.ExploreTile(state, playerState, areaTile, true);
+                }
+            }
+        }
+        // add lightning hit effect for the hammer
     }
 
     [HarmonyPostfix]

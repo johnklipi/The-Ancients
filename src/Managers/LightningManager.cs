@@ -39,7 +39,7 @@ public static class LightningManager
             return;
 		}
 
-		int num = 1;
+		int num = 0;
         if(tile.effects == null)
             tile.effects = new();
 

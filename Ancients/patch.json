@@ -8,14 +8,14 @@
             "startingUnit": "ancwarrior",
             "category": 2,
             "terrainModifier":{
-                "mountain": 1,
-                "forest": 0.5
+                "mountain": 1.5,
+                "forest": 0.8
             },
             "resourceModifier":{
                 "metal": 0,
-                "fruit": 0.6,
-                "game": 0.6,
-                "crop": 0.6
+                "fruit": 0.5,
+                "game": 0.5,
+                "crop": 0.5
             },
             "startingTech":[
                 "basic",
@@ -51,10 +51,45 @@
                 "forge": "ancpowerplant"
             },
             "cityRewardOverrides": {
-                "workshop": "ancfreetech",
-                "park": "ancfreetech"
+                "explorer": "ancfreetech",
+                "workshop": "ancresources",
+                "resources": "ancbordergrowth",
+                "citywall": "ancvetspark",
+                "populationgrowth": "ancwirefence",
+                "bordergrowth": "ancspyvision",
+                "park": "ancfreetech",
+                "superunit": "anchammer"
             },
             "preview": []
+        }
+    },
+    "cityRewardData": {
+        "ancinternal_tech": {
+            "idx": -1,
+            "level": 0
+        },
+        "ancfreetech": {
+            "idx": -1
+        },
+        "ancresources": {
+            "idx": -1,
+            "currencyReward": 5
+        },
+        "ancvetspark": {
+            "idx": -1
+        },
+        "ancbordergrowth": {
+            "idx": -1,
+            "borderGrowthAmount": 1
+        },
+        "ancspyvision": {
+            "idx": -1
+        },
+        "ancwirefence": {
+            "idx": -1
+        },
+        "anchammer": {
+            "idx": -1
         }
     },
     "techData": {
@@ -181,7 +216,7 @@
 			"movement": 1,
 			"range": 2,
 			"attack": 20,
-			"cost": 8,
+			"cost": 3,
 			"weapon": 6,
 			"unitAbilities": [
 				"stiff",
@@ -352,15 +387,7 @@
         }
     },
 
-    "cityRewardData": {
-        "ancinternal_tech": {
-            "idx": -1,
-            "level": 0
-        },
-        "ancfreetech": {
-            "idx": -1
-        }
-    },
+
     "tribeAbility": {
         "anctechless": {
             "idx": -1

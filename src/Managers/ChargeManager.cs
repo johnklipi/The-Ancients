@@ -1,4 +1,3 @@
-using BepInEx.Logging;
 using HarmonyLib;
 using Polytopia.Data;
 using Il2Gen = Il2CppSystem.Collections.Generic;
@@ -10,18 +9,13 @@ namespace Ancients.Manager;
 
 public static class ChargeManager
 {
-    public static void Load(ManualLogSource logger)
-    {
-        Harmony.CreateAndPatchAll(typeof(ChargeManager));
-    }
-
     public static int GetChargeCount(UnitState unit)
     {
         int charges = 0;
 
         foreach (UnitEffect effect in unit.effects)
         {
-            if (effect == Main.Charged)
+            if (effect == Main.charge_effect)
             {
                 charges++;
             }
@@ -68,7 +62,7 @@ public static class ChargeManager
 
         for (int i = 0; i < consumption; i++)
         {
-            unit.effects.Remove(Main.Charged);
+            unit.effects.Remove(Main.charge_effect);
         }
     }
 
@@ -80,13 +74,13 @@ public static class ChargeManager
         if (unit == null) return;
 
 		Il2Gen.List<TileData> list = gameState.Map.GetArea(position, range, true, false);
-		if (unit.HasAbility(Main.Charge))
+		if (unit.HasAbility(Main.charge_ability))
 		{
 			foreach (TileData tile in list)
 			{
 				if (tile.unit == null) continue;
 
-				if (tile.unit.HasAbility(Main.Capacitor))
+				if (tile.unit.HasAbility(Main.capacitor_ability))
 				{
                     if (GetChargeCount(tile.unit) < GetMaxCharge(tile.unit.type))
                     {
@@ -106,7 +100,7 @@ public static class ChargeManager
 
         if (attacker == null || defender == null) return;
 
-		if (attacker.HasAbility(Main.Charge) && defender.HasAbility(Main.Capacitor))
+		if (attacker.HasAbility(Main.charge_ability) && defender.HasAbility(Main.capacitor_ability))
 		{
             ChargeAction action = PolibActionManager.MakeIl2CppAction<ChargeAction>();
             action.PlayerId = defender.owner;
@@ -115,7 +109,7 @@ public static class ChargeManager
             state.ActionStack.Add(action);
 		}
 
-        if (attacker.HasAbility(Main.Capacitor) && DoesConsume(attacker.type, "attack"))
+        if (attacker.HasAbility(Main.capacitor_ability) && DoesConsume(attacker.type, "attack"))
         {
             ChargeAction action = PolibActionManager.MakeIl2CppAction<ChargeAction>();
             action.PlayerId = attacker.owner;
@@ -130,7 +124,7 @@ public static class ChargeManager
     private static void ChargeLoss_MoveAction(GameState gameState, MoveAction __instance)
 	{
 		if (!gameState.TryGetUnit(__instance.UnitId, out var unit)) return;
-        if (unit.HasAbility(Main.Capacitor) && DoesConsume(unit.type, "move") && __instance.Reason == MoveAction.MoveReason.Command)
+        if (unit.HasAbility(Main.capacitor_ability) && DoesConsume(unit.type, "move") && __instance.Reason == MoveAction.MoveReason.Command)
         {
             ChargeAction action = PolibActionManager.MakeIl2CppAction<ChargeAction>();
             action.PlayerId = unit.owner;
@@ -148,7 +142,7 @@ public static class ChargeManager
 
         foreach (UnitEffect effect in unitState.effects)
         {
-            if (effect == Main.Charged)
+            if (effect == Main.charge_effect)
             {
                 __result++;
             }
@@ -163,7 +157,7 @@ public static class ChargeManager
 
         foreach (UnitEffect effect in unitState.effects)
         {
-            if (effect == Main.Charged)
+            if (effect == Main.charge_effect)
             {
                 __result += 50;
             }
@@ -182,7 +176,7 @@ public static class ChargeManager
         int newrange = range;
         foreach (UnitEffect effect in unit.effects)
         {
-            if (effect == Main.Charged)
+            if (effect == Main.charge_effect)
             {
                 newrange++;
             }

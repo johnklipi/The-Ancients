@@ -16,21 +16,32 @@ namespace Ancients;
 public static class Main
 {
     public static ManualLogSource modLogger;
+    private static string ModVersion = "ALPHA1";
+
     public static void Load(ManualLogSource logger)
     {
         Harmony.CreateAndPatchAll(typeof(Main));
+        Harmony.CreateAndPatchAll(typeof(ChargeManager));
+        Harmony.CreateAndPatchAll(typeof(ConductionManager));
+        Harmony.CreateAndPatchAll(typeof(LightningManager));
+        Harmony.CreateAndPatchAll(typeof(PushManager));
+        Harmony.CreateAndPatchAll(typeof(RedirectionManager));
+        Harmony.CreateAndPatchAll(typeof(TechManager));
+        Harmony.CreateAndPatchAll(typeof(RewardManager));
+
         modLogger = logger;
-        logger.LogMessage("Ancients.dll loaded.");
-        modLogger.LogMessage("Version INDEV3");
+        logger.LogMessage("Ancients PolyScript is loaded.");
+        modLogger.LogMessage($"Version {ModVersion}");
 
         PolyMod.Loader.AddPatchDataType("tribeAbility", typeof(TribeAbility.Type));
         PolyMod.Loader.AddPatchDataType("sfx", typeof(SFXTypes));
         PolyMod.Loader.AddPatchDataType("improvementEffect", typeof(ImprovementEffect));
+        PolyMod.Loader.AddPatchDataType("tileEffect", typeof(TileData.EffectType));
     }
 
     [HarmonyPostfix]
     [HarmonyPatch(typeof(GameLogicData), nameof(GameLogicData.AddGameLogicPlaceholders))]
-    public static void GetEnumShit(Newtonsoft.Json.Linq.JObject rootObject)
+    public static void ProcessEnums(Newtonsoft.Json.Linq.JObject rootObject)
     {
         PolibCommandManager.RegisterCommand<DischargeCommand>("dischargecommand");
         PolibCommandManager.RegisterCommand<ExcavateCommandObsolete>("excavatecommand");
@@ -52,45 +63,28 @@ public static class Main
         PolibReactionManager.AssignReaction<LightningExplosionReaction>("lightningexplosionaction");
 
         if (
-            !EnumCache<UnitAbility.Type>.TryGetType("charge_ability", out Charge) 
-            || !EnumCache<UnitAbility.Type>.TryGetType("excavation_ability", out Excavate)
-            || !EnumCache<UnitAbility.Type>.TryGetType("discharge_ability", out Discharge)
-            || !EnumCache<UnitAbility.Type>.TryGetType("capacitor_ability", out Capacitor) 
-            || !EnumCache<UnitAbility.Type>.TryGetType("eightway_ability", out Eightway) 
-            || !EnumCache<UnitAbility.Type>.TryGetType("shock_ability", out Shock) 
-            || !EnumCache<UnitAbility.Type>.TryGetType("protect_ability", out Protect) 
-            || !EnumCache<UnitAbility.Type>.TryGetType("push_ability", out Push) 
-            || !EnumCache<UnitAbility.Type>.TryGetType("lightning_ability", out LightningUnit) 
+            !EnumCache<UnitAbility.Type>.TryGetType("charge_ability", out charge_ability) 
+            || !EnumCache<UnitAbility.Type>.TryGetType("discharge_ability", out discharge_ability)
+            || !EnumCache<UnitAbility.Type>.TryGetType("capacitor_ability", out capacitor_ability)
+            || !EnumCache<UnitAbility.Type>.TryGetType("shock_ability", out shock_ability) 
+            || !EnumCache<UnitAbility.Type>.TryGetType("protect_ability", out protect_ability) 
+            || !EnumCache<UnitAbility.Type>.TryGetType("push_ability", out push_ability) 
+            || !EnumCache<UnitAbility.Type>.TryGetType("lightning_ability", out lightning_ability) 
 
-            || !EnumCache<UnitEffect>.TryGetType("conductive_effect", out Conductive)
-            || !EnumCache<UnitEffect>.TryGetType("charge_effect", out Charged)
+            || !EnumCache<UnitEffect>.TryGetType("conductive_effect", out conductive_effect)
+            || !EnumCache<UnitEffect>.TryGetType("charge_effect", out charge_effect)
 
-            || !EnumCache<CityReward>.TryGetType("highvoltage_secretreward", out var teslaReward) 
-            || !EnumCache<CityReward>.TryGetType("aviation_secretreward", out var droneReward) 
-            || !EnumCache<CityReward>.TryGetType("chargestorage_secretreward", out var accReward) 
-            || !EnumCache<CityReward>.TryGetType("redirection_secretreward", out var sentryReward) 
-
-            || !EnumCache<ImprovementAbility.Type>.TryGetType("lightning_improvementability", out Lightning)
-            || !EnumCache<ImprovementAbility.Type>.TryGetType("electric_improvementability", out Electric)
-            || !EnumCache<ImprovementAbility.Type>.TryGetType("collect_improvementability", out Collect)
-            || !EnumCache<ImprovementAbility.Type>.TryGetType("maxed_improvementability", out Maxed)
-
-            || !EnumCache<ImprovementData.Type>.TryGetType("animacollect_improvement", out Ritual)
+            || !EnumCache<ImprovementAbility.Type>.TryGetType("lightning_improvementability", out lightning_improvementability)
+            || !EnumCache<ImprovementAbility.Type>.TryGetType("powerstorage_improvementability", out powerstorage_improvementability)
 
             || !EnumCache<TribeType>.TryGetType("ancients", out Ancients)
+
+            || !EnumCache<TileData.EffectType>.TryGetType("powerstored", out powerstored)
             )
 		{
-			modLogger.LogInfo("couldnt find some enumcache shit");
+			modLogger.LogFatal("Couldnt find EnumCache!");
 			return;
 		}
-
-        SecretRewards.AddRange(new CityReward[]
-        {
-            teslaReward,
-            droneReward,
-            accReward,
-            sentryReward
-        });
         
         PolibUtils.ParsePerEach<UnitData.Type, int>(rootObject, "unitData", "maxCharge", MaxCharge);
         PolibUtils.ParsePerEach<UnitData.Type, int>(rootObject, "unitData", "chargeConsumptionAmount", ChargeConsumptionAmount);
@@ -106,24 +100,20 @@ public static class Main
     public static Dictionary<UnitData.Type, List<string>> ChargeBuff = new Dictionary<UnitData.Type, List<string>>();
     public static Dictionary<ImprovementData.Type, int> LightningStars = new();
     public static Dictionary<ImprovementData.Type, int> LightningPop = new();
-    public static List<CityReward> SecretRewards = new();
     public static TribeType Ancients;
-    public static UnitAbility.Type Discharge;
-    public static UnitAbility.Type Charge;
-    public static UnitAbility.Type Capacitor;
-    public static UnitAbility.Type Eightway;
-    public static UnitAbility.Type Shock;
-    public static UnitAbility.Type Protect;
-    public static UnitAbility.Type Push;
-    public static UnitAbility.Type LightningUnit;
-    public static UnitEffect Charged;
-    public static UnitEffect Conductive;
-    public static ImprovementAbility.Type Lightning;
-    public static ImprovementAbility.Type Electric;
-    public static ImprovementAbility.Type Collect;
-    public static ImprovementAbility.Type Maxed;
-    public static ImprovementData.Type Ritual;
-    public static UnitAbility.Type Excavate;
+    public static UnitAbility.Type charge_ability;
+    public static UnitAbility.Type discharge_ability;
+    public static UnitAbility.Type capacitor_ability;
+    public static UnitAbility.Type shock_ability;
+    public static UnitAbility.Type protect_ability;
+    public static UnitAbility.Type push_ability;
+    public static UnitAbility.Type lightning_ability;
+    public static UnitEffect charge_effect;
+    public static UnitEffect conductive_effect;
+    public static TileData.EffectType powerstored;
+
+    public static ImprovementAbility.Type lightning_improvementability;
+    public static ImprovementAbility.Type powerstorage_improvementability;
 
 
     [HarmonyPostfix]
@@ -132,7 +122,7 @@ public static class Main
     {
         if (tile.unit == null || tile.unit.owner != player.Id) return;
 
-        if (tile.unit.HasAbility(Discharge) && tile.unit.HasAbility(Capacitor) && !tile.unit.moved && !tile.unit.attacked && ChargeManager.GetChargeCount(tile.unit) > 0)
+        if (tile.unit.HasAbility(discharge_ability) && tile.unit.HasAbility(capacitor_ability) && !tile.unit.moved && !tile.unit.attacked && ChargeManager.GetChargeCount(tile.unit) > 0)
         {
             DischargeCommand command = PolibCommandManager.MakeIl2CppCommand<DischargeCommand>();
             command.Coordinates = tile.coordinates;
@@ -141,18 +131,10 @@ public static class Main
             CommandUtils.AddCommand(gameState, __result, command, includeUnavailable);
         }
 
-        if (tile.unit.HasAbility(Excavate) && !tile.unit.attacked)
-        {
-            ExcavateCommandObsolete command = PolibCommandManager.MakeIl2CppCommand<ExcavateCommandObsolete>();
-            command.Coordinates = tile.coordinates;
-            command.PlayerId = player.Id;
-            CommandUtils.AddCommand(gameState, __result, command, includeUnavailable);
-        }
-
-        if (tile.unit.HasAbility(LightningUnit) && ((!tile.unit.attacked && !tile.unit.moved) || tile.unit.HasAbility(UnitAbility.Type.Dash)))
+        if (tile.unit.HasAbility(lightning_ability) && ((!tile.unit.attacked && !tile.unit.moved) || tile.unit.HasAbility(UnitAbility.Type.Dash)))
         {
             bool flag = false;
-            if (tile.unit.HasAbility(Capacitor))
+            if (tile.unit.HasAbility(capacitor_ability))
             {
                 if (ChargeManager.GetChargeCount(tile.unit) > 0)
                 {
@@ -185,22 +167,6 @@ public static class Main
         UnitState unit = gameState.Map.GetTile(position).unit;
         if (unit == null) return;
 
-        if (unit.HasAbility(Eightway))
-        {
-            if (!unit.moved)
-            {
-                __result = new Il2Gen.List<WorldCoordinates>();
-                return;
-            }
-
-            Il2Gen.List<WorldCoordinates> ewaylist = new();
-            foreach (TileData tile in gameState.Map.GetArea(position, 1, true, false))
-            {
-                ewaylist.Add(tile.coordinates);
-            }
-            __result = ewaylist;
-        }
-
         if (unit.HasAbility(UnitAbility.Type.Consumed) && unit.UnitData.attack == 0 && !unit.HasAbility(UnitAbility.Type.Convert))
         {
             Il2Gen.List<TileData> area = gameState.Map.GetArea(position, range, allowDiagonal: true, includeCenter: false);
@@ -216,47 +182,6 @@ public static class Main
 	}
     
     [HarmonyPrefix]
-    [HarmonyPatch(typeof(AttackCommand), nameof(AttackCommand.ExecuteDefault))]
-    private static bool AttackCommand_ExecuteDefault(GameState gameState, AttackCommand __instance)
-	{
-		if (!gameState.TryGetUnit(__instance.UnitId, out var unit)) return true;
-
-        if (unit.HasAbility(Eightway))
-        {
-            GridDirection direction = WorldCoordinates.GetDirection(__instance.Origin, __instance.Target);
-
-            WorldCoordinates coordinates = __instance.Origin;
-            Il2Gen.List<ActionBase> stack = new();
-            for (int i = 0; i < unit.GetRange(gameState); i ++)
-            {
-                coordinates += direction.ToCoordinates();
-                TileData tile = gameState.Map.GetTile(coordinates);
-
-                if (tile == null) continue;
-
-                if (tile.unit == null)
-                {
-                    stack.Add(new AttackAction(__instance.PlayerId, __instance.Origin, coordinates, 0, false, AttackAction.AnimationType.Splash, 20));
-                    continue;
-                }
-                BattleResults battleResults = BattleHelpers.GetBattleResults(gameState, unit, tile.unit);
-                stack.Add(new AttackAction(__instance.PlayerId, __instance.Origin, coordinates, battleResults.attackDamage, false, AttackAction.AnimationType.Splash, 20));
-            }
-
-            stack.Reverse();
-
-            foreach(ActionBase action in stack)
-            {
-                gameState.ActionStack.Add(action);
-            }
-
-            unit.attacked = true;
-            return false;
-        }
-        return true;
-	}
-
-    [HarmonyPrefix]
     [HarmonyPatch(typeof(ActionUtils), nameof(ActionUtils.KillUnit))]
     private static bool ActionUtils_KillUnit_NullCheck(GameState gameState, TileData tile) //why does this not have a nullcheck ingame??
     {
@@ -265,110 +190,3 @@ public static class Main
         return true;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //I copied from polibrary so this is staying 
-    /*
-
-
-
-                                                                                ███████        ████████                                                                                       
-                                                                           ████                   ██████                                                                                      
-                                                                       ████                   █████                                                                                           
-                                                                     ███                   ███                                                                                                
-                                                                   ███                  ████                                                                                                  
-                                                                 ███                  ███                                                                                                     
-                                                               ███                 ████                                                                                                       
-                                                              ███                 ██                                                                                                          
-                                                             ███                 ██                                                                                                           
-                                                            ██                  ██                                                                                                            
-                                                           ██                   ██               █████                                                                                        
-                                                          ██                      ███   ████████████████████                                                                                  
-                                                         ███                        █████████████████████████████                                                                             
-                                                         ██                     ███████████      █████████████████████                              ██                                        
-                                                         ██                █████████████                ████████████████████                       ███                                        
-                                                         ██            █████████████                        ████████████████████████  ██████     ███ ██                                       
-                                                          ██        ██████████████                              ████████████████████████████   ███   ██                                       
-                                                        ████    █████████████████                    ██            ██████████████████████   ████     ██                                       
-                                                       ███████████████████████                         ██            ███████████████████████         ██                                       
-                                                       ██████████████████████        ███████             ██           █████████████████              ██                                       
-                                                       █████████████████████            ██████            ██            ████████████████             ██                                       
-                                                       ████████████████████                ████            ██            ███████████████            ██                                        
-                                                       ██████████████████                    ███            ████          ██████████████           ██                                         
-                                                     ███████████████████              ███████████                          █████████████          ██                                          
-                                                  █████████████████████            ██ █  ██████████                        ██████████████       ██                                            
-                                                 █████████████████████                  █████    ███                        █████████████      ██                                             
-                                               ██████████████████████                          █   ██       █                ███████████     ███                                              
-                                               █████████████████████                                     ███        ███████  ███████████   ███                                                
-                                              █████████████████████         ██                              ███████████      ██████████████                                                   
-                                             █████████████████████          ███                                  ████ ██     ████████████                                                     
-                                             ████████████████████          █████                                         █  ████████████                                                      
-                                            █████████████████████          ███████                                          █████████                                                         
-                                            ████████████████████          ███████████          ███    ██                   █████████                                                          
-                                            ███████████████████        ███████████████████               ██                ████████                                                           
-                                    ███████████████████████████       █████████████████████                  ██           ████████                                                            
-                      █████████████████     ██████████████████        ████████████████████████                            ████████                                                            
-              ████████████                 ██████████████████        █████████    ████████████                            ████████                                                            
-        █████████                         ███████████████████       █████████    ██       ████   ██                       ████████                                                            
-                                        ██  ████████████████        █████████     ██         ███  ██              ███     █████████                                                           
-                                      ███   ███   ██████████       ██████████      █           ███                 ████   █████████                                                           
-                                     ██             ████████      █████████         █           █████      █        ████  █████████                                                           
-                                    ██               ███████      ████████           ███          ██████          █████████████████   ██                                                      
-                                  ███                ████████    ███████                ███           ███████████       ████████████████                                                      
-                                 ██                  █████████   ██████     █              ██                              ███████████                                                        
-                                ██                  ███████████████████ █████          █      ████                          ██████████                                                        
-                               ██                ██████████████████████████             ███       █████                   █  ███████████                                                      
-                             ███             █████████████████████████████                 ███           █████        █████   ███████████                                                     
-                             ██               ███████████████████████████                      █                               ██████████                                                     
-                           ███                 ██████████████████████████                                                       █████████                                                     
-                          ██                     ████████████████████████                                                       ███   ██                                                      
-                          ██                       ████████████████████████                                         ██         ███     ██                                                     
-                         ██                          ██████████████████████                                      ███           ██      ██                                                     
-                        ██                             █████████████████████                                  ███              ██       ██                                                    
-                        ██                               ███████████████████                             █████                ██        ██                                                    
-                       ██                                  ██████████████████                                                ██          █                                                    
-                       ██                                   █████████████████                                               ██           ██                                                   
-                      ██                                  ██ ██████████████████                                            ██             ██                                                  
-                     ██                                  ███  ████████████████████            ██                          █               ███                                                 
-                     ██                                 ██     █████████████████████         ██                          ██               █████                                               
-                     ██                                ██       ███████████████████████    █████     ██                 ██                ██  ███                                             
-                     ██                               ██         ████████████████████████████████   ████     ███       ██                 █     ███                                           
-                     █                              ██           ████████████████████████████████████████████████    ███                 ██       ██                                          
-                    ██                            ███             █████████████████████████████████████████████████████                  █         ███                                        
-                    ██                           ███               ███████████████████████████████████████████████████                  ██          ███                                       
-                     █                          ██                  ████████████████████████████████████████████████                   ██             ██                                      
-                     ██                        ██                   ███████████████████████████████████████████████                  ██                ███                                    
-                     ██                      ██                      ████████████████████████████████████████████████             ███                   ███                                   
-                      ██                   ███                        █████████████████████████████████████████      ███████  █████                      ███                                  
-                       ██                 ██                           ███████████████████████████████████████                                            ███                                 
-        */

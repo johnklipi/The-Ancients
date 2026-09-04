@@ -1,41 +1,32 @@
 {
-    "unit_names_archeologist__unit": {
+    "unit_names_ancarcheologist": {
         "English": "Archeologist"
     },
-    "unit_names_warrior__unit": {
+    "unit_names_ancwarrior": {
         "English": "Lightning Warrior"
     },
-    "unit_names_rider__unit": {
+    "unit_names_anclancer": {
         "English": "Lancer"
     },
-    "unit_names_archer__unit": {
+    "unit_names_ancarcher": {
         "English": "Lightning Archer"
     },
-    "unit_names_railcannon__unit": {
+    "unit_names_ancrailcannon": {
         "English": "Railgunner"
     },
-    "unit_names_teslatower__unit": {
+    "unit_names_ancteslatower": {
         "English": "Tesla Coil"
     },
-    "unit_names_accumulator__unit": {
+    "unit_names_ancaccumulator": {
         "English": "Accumulator"
     },
-    "unit_names_drone__unit": {
-        "English": "Drone"
-    },
-    "unit_names_sentry__unit": {
+    "unit_names_ancsentry": {
         "English": "Sentry"
     },
-    "unit_names_spark__unit": {
+    "unit_names_ancspark": {
         "English": "Jumpspark"
     },
-    "unit_names_mjolnir__unit": {
-        "English": "Mjolnir"
-    },
-    "unit_names_mjolship__unit": {
-        "English": "Mjolship"
-    },
-    "unit_names_dagger__unit": {
+    "unit_names_ancdagger": {
         "English": "Lightning Dagger"
     },
 
@@ -92,24 +83,18 @@
     "actionbox_unit_charge__effect": {
         "English": "Charge"
     },
+    "actionbox_unit_hammercharged__effect": {
+        "English": "Topan's Hammer"
+    },
     "actionbox_unit_conductive__effect": {
         "English": "Conductive"
     },
 
-    "building_names_lightningrod__improvement": {
+    "building_names_ancrod": {
         "English": "Lightning Rod"
     },
-    "building_names_animaconduit__improvement": {
-        "English": "Ænima Conduit"
-    },
-    "building_names_animacollect__improvement": {
-        "English": "Ritual"
-    },
-    "building_names_animatotem__improvement": {
-        "English": "Ænima Totem"
-    },
-    "building_names_animarket__improvement": {
-        "English": "Ænimarket"
+    "building_names_ancpowerplant": {
+        "English": "Power Plant"
     },
 
     "building_ability_lightning__improvementability": {
@@ -142,45 +127,29 @@
         "English": "You found ancient writings detailing forgotten applications of lightning magic. Your researchers successfully decoded the writings."
     },
 
-    "technology_names_tesla__secrettech": {
-        "English": "High Voltage"
+    "wcontroller_reward_ancinternal__tech": {
+        "English": "Manuscript"
     },
-    "technology_names_accumulator__secrettech": {
-        "English": "Charge Storage"
+    "wcontroller_reward_ancfreetech": {
+        "English": "Manuscript"
     },
-    "technology_names_drone__secrettech": {
-        "English": "Aviation"
+    "wcontroller_reward_ancresources": {
+        "English": "Resources"
     },
-    "technology_names_sentry__secrettech": {
-        "English": "Redirection"
+    "wcontroller_reward_ancbordergrowth": {
+        "English": "Border Growth"
     },
-    "technology_names_lightning__tech": {
-        "English": "Ḻightning"
+    "wcontroller_reward_ancvetspark": {
+        "English": "Veteran Spark"
     },
-    "technology_names_animation__tech": {
-        "English": "Ænimation"
+    "wcontroller_reward_ancwirefence": {
+        "English": "Wire Fence"
     },
-    "technology_names_lunacy__tech": {
-        "English": "Ḻunacy"
+    "wcontroller_reward_ancspyvision": {
+        "English": "Spy Vision"
     },
-    "technology_names_archery__tech": {
-        "English": "Archery"
-    },
-
-    "wcontroller_reward_highvoltage__secretreward": {
-        "English": "High Voltage"
-    },
-    "wcontroller_reward_chargestorage__secretreward": {
-        "English": "Charge Storage"
-    },
-    "wcontroller_reward_aviation__secretreward": {
-        "English": "Aviation"
-    },
-    "wcontroller_reward_logistics__secretreward": {
-        "English": "Charge Logistics"
-    },
-    "wcontroller_reward_redirection__secretreward": {
-        "English": "Redirection"
+    "wcontroller_reward_anchammer": {
+        "English": "Topan's Hammer"
     },
 
     "tribes_ancients": {

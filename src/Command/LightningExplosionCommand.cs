@@ -11,7 +11,7 @@ public class LightningExplosionCommand : PolibCommandBase
     {
         UnitState unit = state.Map.GetTile(Coordinates).unit;
 
-        if (unit != null && !unit.HasAbility(Main.Capacitor))
+        if (unit != null && !unit.HasAbility(Main.capacitor_ability))
         {
             state.ActionStack.Add(new KillUnitAction(PlayerId, Coordinates));
         }

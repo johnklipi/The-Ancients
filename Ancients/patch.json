@@ -5,17 +5,17 @@
             "startingStars": 2,
             "color": 48127,
             "language": "pol,topan,poly,to,pia,ria,pius,polan,ran,ol,tes,la,sa,tor,ci,te,ty,cap,kap,sua,ius,xin,ouy,urk,ki,dor,wast,tza,on,aqu,cy",
-            "startingUnit": "warrior_unit",
+            "startingUnit": "ancwarrior",
             "category": 2,
             "terrainModifier":{
-                "mountain": 1,
-                "forest": 0.5
+                "mountain": 1.5,
+                "forest": 0.8
             },
             "resourceModifier":{
                 "metal": 0,
-                "fruit": 0.6,
-                "game": 0.6,
-                "crop": 0.6
+                "fruit": 0.5,
+                "game": 0.5,
+                "crop": 0.5
             },
             "startingTech":[
                 "basic",
@@ -30,86 +30,72 @@
                 "fruit"
             ],
             "tribeAbilities":[
-                "techless",
-                "ruinspawner"
+                "anctechless",
+                "ancruinbuilder"
             ],
             "techOverrides":{
             },
             "unitOverrides":{
-                "warrior": "warrior_unit",
+                "warrior": "ancwarrior",
                 "giant": "none",
-                "dagger": "dagger_unit",
-                "catapult": "teslatower_unit",
-                "knight": "spark_unit",
-                "archer": "railcannon_unit",
-                "rider": "rider_unit",
-                "defender": "sentry_unit",
-                "swordsman": "accumulator_unit"
+                "dagger": "ancdagger",
+                "catapult": "ancteslatower",
+                "knight": "ancspark",
+                "archer": "ancrailcannon",
+                "rider": "anclancer",
+                "defender": "ancsentry",
+                "swordsman": "ancaccumulator"
             },
             "improvementOverrides":{
-                "mine": "lightningrod_improvement",
-                "forge": "animaconduit_improvement"
+                "mine": "ancrod",
+                "forge": "ancpowerplant"
+            },
+            "cityRewardOverrides": {
+                "explorer": "ancfreetech",
+                "workshop": "ancresources",
+                "resources": "ancbordergrowth",
+                "citywall": "ancvetspark",
+                "populationgrowth": "ancwirefence",
+                "bordergrowth": "ancspyvision",
+                "park": "ancfreetech",
+                "superunit": "anchammer"
             },
             "preview": []
         }
     },
+    "cityRewardData": {
+        "ancinternal_tech": {
+            "idx": -1,
+            "level": 0
+        },
+        "ancfreetech": {
+            "idx": -1
+        },
+        "ancresources": {
+            "idx": -1,
+            "currencyReward": 5
+        },
+        "ancvetspark": {
+            "idx": -1
+        },
+        "ancbordergrowth": {
+            "idx": -1,
+            "borderGrowthAmount": 1
+        },
+        "ancspyvision": {
+            "idx": -1
+        },
+        "ancwirefence": {
+            "idx": -1
+        },
+        "anchammer": {
+            "idx": -1
+        }
+    },
     "techData": {
-        "basic": {
-            "improvementUnlocks": [
-                "+animacollect_improvement"
-            ]
-        },
-        "animation_tech": {
-            "improvementUnlocks": [
-                "animaconduit_improvement"
-            ],
-            "techUnlocks": [
-                "archery_tech",
-                "lightning_tech"
-            ],
-			"cost": 1,
-			"idx": -1
-        },
-        "lightning_tech": {
-            "improvementUnlocks": [
-                "lightningrod_improvement"
-            ],
-            "techUnlocks": [
-                "lunacy_tech"
-            ],
-			"cost": 2,
-			"idx": -1
-        },
-        "lunacy_tech": {
-            "improvementUnlocks": [
-                "animatotem_improvement"
-            ],
-            "unitUnlocks": [
-                "catapult"
-            ],
-			"cost": 3,
-			"idx": -1
-        },
-        "archery_tech": {
-			"techUnlocks": [
-				"spiritualism"
-			],
-			"unitUnlocks": [
-				"archer"
-			],
-            "improvementUnlocks":[
-                "clearforest"
-            ],
-			"defenceBonusUnlocks": {
-				"forest": 15
-			},
-			"cost": 2,
-			"idx": -1
-		}
-
     },
     "unitData": {
-        "warrior_unit": {
+        "ancwarrior": {
             "idx": -1,
             "health": 100,
             "defence": 20,
@@ -126,24 +112,7 @@
             "weapon": 1,
             "prefab": "warrior"
         },
-        "archer_unit": {
-            "idx": -1,
-            "health": 100,
-            "defence": 10,
-            "movement": 1,
-            "range": 2,
-            "attack": 20,
-            "cost": 3,
-            "unitAbilities": [
-                "land",
-                "dash",
-                "fortify",
-                "charge_ability"
-            ],
-            "weapon": 3,
-            "prefab": "archer"
-        },
-        "rider_unit": {
+        "anclancer": {
             "idx": -1,
             "health": 100,
             "defence": 10,
@@ -169,7 +138,7 @@
                 "attack"
             ]
         },
-        "teslatower_unit": {
+        "ancteslatower": {
             "idx": -1,
             "health": 100,
             "defence": 0,
@@ -195,7 +164,7 @@
                 "attack"
             ]
         },
-        "accumulator_unit": {
+        "ancaccumulator": {
             "idx": -1,
             "health": 200,
             "defence": 30,
@@ -220,7 +189,7 @@
                 "attack"
             ]
         },
-        "sentry_unit": {
+        "ancsentry": {
             "idx": -1,
             "health": 100,
             "defence": 20,
@@ -241,13 +210,13 @@
             "maxCharge": 2,
             "chargeConsumptionAmount": 1
         },
-        "railcannon_unit": {
+        "ancrailcannon": {
             "health": 100,
 			"defence": 10,
 			"movement": 1,
 			"range": 2,
 			"attack": 20,
-			"cost": 8,
+			"cost": 3,
 			"weapon": 6,
 			"unitAbilities": [
 				"stiff",
@@ -267,7 +236,7 @@
 
             "prefab": "warrior"
         },
-        "spark_unit": {
+        "ancspark": {
             "health": 50,
 			"defence": 10,
 			"movement": 2,
@@ -289,7 +258,7 @@
 
             "prefab": "spark"
         },
-        "dagger_unit": {
+        "ancdagger": {
 			"health": 100,
 			"defence": 10,
 			"movement": 1,
@@ -311,10 +280,6 @@
 		}
     },
     "unitAbility": {
-        "excavation_ability": {
-            "idx": -1
-        },
-
         "capacitor_ability": {
             "idx": -1
         },
@@ -325,10 +290,6 @@
 
         "discharge_ability": {
             "idx":-1
-        },
-
-        "eightway_ability": {
-            "idx": -1
         },
 
         "shock_ability": {
@@ -355,27 +316,30 @@
         "conductive_effect": {
             "idx": -1,
             "color": "0.4,0.97,1,1"
+        },
+        "hammercharged": {
+            "idx": -1,
+            "color": "0.6,0.87,0.98,1"
+        }
+    },
+    "tileEffect": {
+        "powerstored": {
+            "idx": -1
         }
     },
     "improvementAbility": {
         "lightning_improvementability": {
             "idx": -1
         },
-        "electric_improvementability": {
+        "powerstorage_improvementability": {
             "idx": -1
         },
         "collect_improvementability": {
             "idx": -1
-        },
-        "maxed_improvementability": {
-            "idx": -1
         }
     },
     "improvementData": {
-        "immafixthisonceiswear": {
-            "idx": -1
-        },
-        "lightningrod_improvement": {
+        "ancrod": {
 			"cost": 3,
 			"terrainRequirements": [
                 {
@@ -383,13 +347,12 @@
                 }
 			],
             "improvementAbilities": [
-                "lightning_improvementability",
-                "limited"
+                "lightning_improvementability"
             ],
 			"maxLevel": 0,
 			"idx": -1
 		},
-        "animaconduit_improvement": {
+        "ancpowerplant": {
 			"cost": 5,
 			"terrainRequirements": [
                 {
@@ -399,8 +362,14 @@
 					"terrain": "forest"
 				}
 			],
+			"adjacencyRequirements": [
+				{
+					"improvement": "ancrod"
+				}
+			],
             "improvementAbilities": [
-                "electric_improvementability"
+                "limited",
+                "powerstorage_improvementability"
             ],
             "rewards": [
                 {"population": 1}
@@ -408,119 +377,26 @@
 			"maxLevel": 8,
 			"idx": -1
 		},
-        "animaconduit_old_improvement": {
-			"cost": 4,
-			"terrainRequirements": [
-                {
-					"terrain": "field"
-				},
-                {
-					"terrain": "forest"
-				}
-			],
-            "improvementAbilities": [
-                "electric_improvementability",
-                "collect_improvementability"
-            ],
-            "rewards": [
-                {"population": 1}
-            ],
-			"maxLevel": 2,
-			"idx": -1
-		},
-        "animacollect_improvement": {
+        "powercollect_improvement": {
             "idx": -1,
-            "cost": 2,
+            "cost": 0,
             "improvementAbilities": [
                 "discrete"
             ],
             "rewards": [
-                {"population": 1}
-            ]
-        },
-        "animatotem_improvement": {
-			"cost": 5,
-			"terrainRequirements": [
-				{
-					"terrain": "forest"
-				},
                 {
-					"terrain": "field"
-				},
-                {
-                    "terrain": "mountain"
+                    "population": 1
                 }
-			],
-			"maxLevel": 8,
-            "improvementAbilities": [
-                "limited",
-                "simple"
-            ],
-            "adjacencyImprovements": [
-				{
-					"improvement": "animaconduit_improvement"
-				}
-			],
-			"adjacencyRequirements": [
-				{
-					"improvement": "animaconduit_improvement"
-				}
-			],
-			"idx": -1,
-            "growthRewards": [
-                {"population": 1}
             ]
-		},
-
-        "animarket_improvement": {
-            "idx": -1,
-			"maxLevel": 8,
-			"cost": 5,
-			"work": 1,
-			"terrainRequirements": [
-				{
-					"terrain": "field"
-				}
-			],
-			"adjacencyImprovements": [
-				{
-					"improvement": "animatotem_improvement"
-				}
-			],
-			"adjacencyRequirements": [
-				{
-					"improvement": "animatotem_improvement"
-				}
-			],
-			"improvementAbilities": [
-				"limited"
-			]
         }
     },
 
-    "cityRewardData": {
-        "highvoltage_secretreward": {
-            "idx": -1,
-            "level": 0
-        },
-        "aviation_secretreward": {
-            "idx": -1,
-            "level": 0
-        },
-        "chargestorage_secretreward": {
-            "idx": -1,
-            "level": 0
-        },
-        "redirection_secretreward": {
-            "idx": -1,
-            "level": 0
-        }
-    },
+
     "tribeAbility": {
-        "techless": {
+        "anctechless": {
             "idx": -1
         },
-        "ruinspawner": {
+        "ancruinbuilder": {
             "idx": -1
         }
     },

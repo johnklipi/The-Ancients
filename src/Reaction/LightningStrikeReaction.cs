@@ -70,7 +70,7 @@ public class LightningStrikeReaction : PolibReactionBase
             originTileInstance.DoPuff("DischargePuff", originTileInstance.transform, originTileInstance.VisualCenterObject.localPosition);
         }
 
-        if (originTileData.unit != null && originTileData.unit.HasAbility(Main.Capacitor)  && ChargeManager.GetChargeCount(originTileData.unit) < ChargeManager.GetMaxCharge(originTileData.unit.type))
+        if (originTileData.unit != null && originTileData.unit.HasAbility(Main.capacitor_ability)  && ChargeManager.GetChargeCount(originTileData.unit) < ChargeManager.GetMaxCharge(originTileData.unit.type))
         {
             GameManager.DelayCall(200, onComplete);
             return;
@@ -92,7 +92,7 @@ public class LightningStrikeReaction : PolibReactionBase
             if (!GameManager.GameState.GameLogicData.TryGetData(rodNeighbourTileData.improvement.type, out var data))
             continue;
 
-            if (!data.HasAbility(Main.Electric))
+            if (!data.HasAbility(Main.powerstorage_improvementability))
             continue;
 
             rodNeighbourTileInstance.Render();

@@ -83,6 +83,9 @@
     "actionbox_unit_charge__effect": {
         "English": "Charge"
     },
+    "actionbox_unit_hammercharged__effect": {
+        "English": "Topan's Hammer"
+    },
     "actionbox_unit_conductive__effect": {
         "English": "Conductive"
     },
@@ -129,6 +132,24 @@
     },
     "wcontroller_reward_ancfreetech": {
         "English": "Manuscript"
+    },
+    "wcontroller_reward_ancresources": {
+        "English": "Resources"
+    },
+    "wcontroller_reward_ancbordergrowth": {
+        "English": "Border Growth"
+    },
+    "wcontroller_reward_ancvetspark": {
+        "English": "Veteran Spark"
+    },
+    "wcontroller_reward_ancwirefence": {
+        "English": "Wire Fence"
+    },
+    "wcontroller_reward_ancspyvision": {
+        "English": "Spy Vision"
+    },
+    "wcontroller_reward_anchammer": {
+        "English": "Topan's Hammer"
     },
 
     "tribes_ancients": {

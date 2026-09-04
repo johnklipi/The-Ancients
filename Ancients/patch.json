@@ -316,6 +316,10 @@
         "conductive_effect": {
             "idx": -1,
             "color": "0.4,0.97,1,1"
+        },
+        "hammercharged": {
+            "idx": -1,
+            "color": "0.6,0.87,0.98,1"
         }
     },
     "tileEffect": {

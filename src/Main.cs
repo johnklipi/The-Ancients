@@ -27,6 +27,7 @@ public static class Main
         Harmony.CreateAndPatchAll(typeof(PushManager));
         Harmony.CreateAndPatchAll(typeof(RedirectionManager));
         Harmony.CreateAndPatchAll(typeof(TechManager));
+        Harmony.CreateAndPatchAll(typeof(RewardManager));
 
         modLogger = logger;
         logger.LogMessage("Ancients PolyScript is loaded.");

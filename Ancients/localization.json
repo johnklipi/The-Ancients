@@ -83,7 +83,7 @@
     "actionbox_unit_charge__effect": {
         "English": "Charge"
     },
-    "actionbox_unit_hammercharged__effect": {
+    "actionbox_unit_hammercharged": {
         "English": "Topan's Hammer"
     },
     "actionbox_unit_conductive__effect": {

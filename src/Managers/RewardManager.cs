@@ -105,15 +105,15 @@ public static class RewardManager
 	public static void GetAttack(ref int __result, UnitState unitState, GameState gameState)
 	{
 		if(unitState.HasEffect(EnumCache<UnitEffect>.GetType("hammercharged")))
-            __result += 2;
+            __result += 200;
 	}
 
     [HarmonyPostfix]
-    [HarmonyPatch(typeof(UnitDataExtensions), nameof(UnitDataExtensions.GetDefence), new System.Type[] { typeof(UnitState), typeof(GameState)})]
-	public static void GetDefence(ref int __result, UnitState unit, GameState state)
+    [HarmonyPatch(typeof(UnitDataExtensions), nameof(UnitDataExtensions.GetDefenceBonus))]
+	public static void GetDefenceBonus(ref int __result, UnitState unit, GameState gameState)
 	{
 		if(unit.HasEffect(EnumCache<UnitEffect>.GetType("hammercharged")))
-            __result += 2;
+            __result += 10;
 	}
 
     [HarmonyPostfix]
